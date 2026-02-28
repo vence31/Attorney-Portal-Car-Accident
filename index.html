@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8fafc" id="theme-color">
+<title>Attorney Lead Portal | Accident AI</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@800;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Light theme (default) */
+  --bg-light:     #f8fafc;
+  --bg2-light:    #ffffff;
+  --bg3-light:    #eef2f6;
+  --red-light:    #dc2626;
+  --red-d-light:  #b91c1c;
+  --green-light:  #16a34a;
+  --yellow-light: #eab308;
+  --blue-light:   #2563eb;
+  --muted-light:  #64748b;
+  --text-light:   #0f172a;
+  --border-light: #e2e8f0;
+
+  /* Dark theme */
+  --bg-dark:     #020617;
+  --bg2-dark:    #0f172a;
+  --bg3-dark:    #1e293b;
+  --red-dark:    #ef4444;
+  --red-d-dark:  #dc2626;
+  --green-dark:  #10b981;
+  --yellow-dark: #f59e0b;
+  --blue-dark:   #3b82f6;
+  --muted-dark:  #64748b;
+  --text-dark:   #f8fafc;
+  --border-dark: rgba(51,65,85,.75);
+
+  /* Default to light */
+  --bg:     var(--bg-light);
+  --bg2:    var(--bg2-light);
+  --bg3:    var(--bg3-light);
+  --red:    var(--red-light);
+  --red-d:  var(--red-d-light);
+  --green:  var(--green-light);
+  --yellow: var(--yellow-light);
+  --blue:   var(--blue-light);
+  --muted:  var(--muted-light);
+  --text:   var(--text-light);
+  --border: var(--border-light);
+
+  --mono: 'JetBrains Mono', monospace;
+  --disp: 'Syne', sans-serif;
+  --body: 'Manrope', sans-serif;
+}
+
+body.dark-theme {
+  --bg:     var(--bg-dark);
+  --bg2:    var(--bg2-dark);
+  --bg3:    var(--bg3-dark);
+  --red:    var(--red-dark);
+  --red-d:  var(--red-d-dark);
+  --green:  var(--green-dark);
+  --yellow: var(--yellow-dark);
+  --blue:   var(--blue-dark);
+  --muted:  var(--muted-dark);
+  --text:   var(--text-dark);
+  --border: var(--border-dark);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .3s ease,color .3s ease;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 8% 10%,rgba(220,38,38,.12) 0%,transparent 42%),
+             radial-gradient(circle at 88% 78%,rgba(220,38,38,.06) 0%,transparent 38%);
+  transition:opacity .3s ease;
+}
+body.dark-theme::before{
+  background:radial-gradient(circle at 8% 10%,rgba(153,27,27,.25) 0%,transparent 42%),
+             radial-gradient(circle at 88% 78%,rgba(239,68,68,.06) 0%,transparent 38%);
+}
+
+/* ── TOPBAR ── */
+.tb{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background-color .3s ease;
+}
+body.dark-theme .tb{background:rgba(2,6,23,.92)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-ic{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,#991b1b,#dc2626);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.logo-nm{font-family:var(--disp);font-size:17px;font-weight:900;letter-spacing:-.02em}
+.logo-sb{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+.tb-r{display:flex;align-items:center;gap:10px}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  display:flex;align-items:center;gap:4px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:30px;padding:3px;cursor:pointer;
+  transition:all .2s ease;
+}
+.theme-toggle:hover{border-color:var(--red);}
+.theme-option{
+  padding:5px 12px;border-radius:30px;
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;
+  color:var(--muted);transition:all .2s ease;user-select:none;
+}
+.theme-option.active{background:var(--red);color:white;}
+
+.plan-pill{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;
+}
+.plan-pill.gold{background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25);color:#b45309}
+.plan-pill.blue{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);color:var(--blue)}
+.plan-pill.red{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);color:var(--red)}
+.updated{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.ref-btn{
+  background:transparent;border:1px solid var(--border);border-radius:7px;
+  color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:700;
+  padding:6px 12px;cursor:pointer;transition:all .15s;
+}
+.ref-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* ── COVERAGE BANNER ── */
+.cov{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,rgba(153,27,27,.08),rgba(220,38,38,.04));
+  border-bottom:1px solid var(--border);
+  padding:14px 32px;
+  display:flex;align-items:center;gap:14px;
+}
+.cov-ic{font-size:22px}
+.cov-tag{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:2px}
+.cov-val{font-family:var(--disp);font-size:16px;font-weight:900;letter-spacing:-.01em}
+.cov-states{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.04em}
+
+/* ── STATS ROW ── */
+.stats{
+  position:relative;z-index:1;
+  display:flex;border-bottom:1px solid var(--border);
+  background:var(--bg2);transition:background-color .3s ease;
+}
+.sv{
+  flex:1;padding:16px 28px;border-right:1px solid var(--border);
+  transition:background .15s;
+}
+.sv:last-child{border-right:none}
+.sv:hover{background:var(--bg3)}
+.sv-n{font-family:var(--disp);font-size:26px;font-weight:900;line-height:1;margin-bottom:3px}
+.sv-n.r{color:var(--red)}
+.sv-n.y{color:var(--yellow)}
+.sv-n.g{color:var(--green)}
+.sv-n.b{color:var(--blue)}
+.sv-l{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── CONTROLS ── */
+.controls{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px 32px;background:var(--bg);border-bottom:1px solid var(--border);
+  transition:background-color .3s ease;
+}
+.sw{
+  display:flex;align-items:center;gap:8px;flex:1;min-width:200px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0 12px;
+  transition:border-color .2s,background-color .3s ease;
+}
+.sw:focus-within{border-color:var(--red)}
+.sw-ic{font-size:13px}
+.sw input{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:var(--body);font-size:12px;color:var(--text);padding:8px 0;
+}
+.sw input::placeholder{color:var(--muted)}
+.pills{display:flex;gap:5px}
+.pill{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  padding:6px 13px;border-radius:20px;cursor:pointer;
+  border:1px solid var(--border);background:transparent;
+  color:var(--muted);transition:all .15s;
+}
+.pill.on,.pill:hover{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.07)}
+.pill.hp.on{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.1)}
+.pill.wp.on{border-color:var(--yellow);color:var(--yellow);background:rgba(234,179,8,.1)}
+.sort-sel{
+  background:var(--bg2);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-family:var(--mono);font-size:10px;
+  padding:7px 11px;outline:none;cursor:pointer;
+  transition:border-color .2s,background-color .3s ease;
+}
+.sort-sel:focus{border-color:var(--red)}
+
+/* ── MAIN GRID ── */
+.main{position:relative;z-index:1;padding:24px 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+
+/* ── CARDS ── */
+.card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:13px;
+  overflow:hidden;cursor:pointer;transition:all .18s;
+  position:relative;
+}
+.card:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(220,38,38,.12);transform:translateY(-2px)}
+body.dark-theme .card:hover{box-shadow:0 4px 20px rgba(239,68,68,.15)}
+.cs{width:100%;height:3px}
+.cs.hot{background:linear-gradient(90deg,#991b1b,#ef4444)}
+.cs.warm{background:linear-gradient(90deg,#92400e,#f59e0b)}
+.cs.cool{background:linear-gradient(90deg,#1e3a8a,#3b82f6)}
+.cb{padding:14px 16px}
+.cr1{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:9px}
+.cname{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:-.01em;margin-bottom:2px}
+.csub{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.04em}
+
+/* Score ring */
+.ring-wrap{position:relative;width:54px;height:54px;flex-shrink:0}
+.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-num{font-family:var(--disp);font-size:13px;font-weight:900;line-height:1}
+.ring-lbl{font-family:var(--mono);font-size:7px;color:var(--muted)}
+
+.acc-type{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--red);
+  border-radius:4px;padding:3px 7px;display:inline-block;margin-bottom:7px;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+body.dark-theme .acc-type{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+.ctier{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}
+.ctier.hot{color:var(--red)}.ctier.warm{color:var(--yellow)}.ctier.cool{color:var(--blue)}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:9px}
+.ic{
+  background:rgba(255,255,255,.6);border:1px solid var(--border);
+  border-radius:5px;padding:6px 8px;
+  font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.04em;
+  transition:background-color .3s ease;
+}
+body.dark-theme .ic{background:rgba(2,6,23,.6)}
+.ic strong{display:block;font-size:10px;color:var(--text);font-weight:700;margin-top:2px;font-family:var(--body)}
+.fchips{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
+.fc{
+  font-family:var(--mono);font-size:7px;padding:2px 6px;border-radius:3px;
+  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.18);color:var(--red);
+}
+body.dark-theme .fc{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.18);color:#fca5a5}
+.fc.warn{background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.2);color:#b45309}
+body.dark-theme .fc.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2);color:#fcd34d}
+.cfoot{display:flex;gap:7px;padding:9px 16px 13px}
+.cbtn{
+  flex:1;padding:8px;border-radius:6px;
+  font-family:var(--body);font-size:10px;font-weight:700;
+  cursor:pointer;border:none;transition:all .15s;
+}
+.cbtn-p{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff}
+.cbtn-p:hover{box-shadow:0 4px 14px rgba(220,38,38,.4)}
+.cbtn-o{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.cbtn-o:hover{border-color:var(--red);color:var(--red)}
+
+/* ── MODAL ── */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(255,255,255,.88);z-index:200;
+  backdrop-filter:blur(8px);padding:20px;overflow-y:auto;
+  transition:background-color .3s ease;
+}
+body.dark-theme .overlay{background:rgba(2,6,23,.88)}
+.overlay.show{display:flex;align-items:flex-start;justify-content:center}
+.modal{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
+  max-width:640px;width:100%;position:relative;overflow:hidden;margin:auto;
+}
+.modal-top{height:3px;background:linear-gradient(90deg,#991b1b,#ef4444)}
+.mhd{
+  padding:20px 22px;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+}
+.mhd-name{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.02em}
+.mhd-sub{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
+.mclose{
+  background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);
+  border-radius:5px;color:var(--red);font-size:13px;
+  width:28px;height:28px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;
+}
+body.dark-theme .mclose{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2)}
+.mclose:hover{background:rgba(220,38,38,.2)}
+.mbody{padding:20px 22px}
+.mscore{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.6);border:1px solid var(--border);
+  border-radius:9px;padding:12px 16px;margin-bottom:16px;transition:background-color .3s ease;
+}
+body.dark-theme .mscore{background:rgba(2,6,23,.6)}
+.ms-n{font-family:var(--disp);font-size:40px;font-weight:900;line-height:1}
+.ms-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+.ms-badge{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;
+}
+.ms-badge.hot{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);color:var(--red)}
+body.dark-theme .ms-badge.hot{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3)}
+.ms-badge.warm{background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.3);color:var(--yellow)}
+.ms-badge.cool{background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:var(--blue)}
+.msec{margin-bottom:14px}
+.msec-t{
+  font-family:var(--mono);font-size:8px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+  margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--border);
+}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mcell{
+  background:rgba(255,255,255,.5);border:1px solid var(--border);
+  border-radius:7px;padding:9px 12px;transition:background-color .3s ease;
+}
+body.dark-theme .mcell{background:rgba(2,6,23,.5)}
+.mcell-l{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.mcell-v{font-size:12px;font-weight:700;color:var(--text);margin-top:3px}
+.contact-block{
+  background:rgba(255,255,255,.6);border:1px solid var(--border);
+  border-radius:8px;padding:11px 14px;transition:background-color .3s ease;
+}
+body.dark-theme .contact-block{background:rgba(2,6,23,.6)}
+.contact-t{font-family:var(--mono);font-size:8px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.crow{display:flex;align-items:center;gap:9px;margin-bottom:6px;font-size:12px}
+.crow:last-child{margin:0}
+.c-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);width:50px;flex-shrink:0}
+.c-val{color:var(--text);font-weight:600}
+.c-val a{color:var(--red);text-decoration:none}
+.c-val a:hover{text-decoration:underline}
+.mflags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.mfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px}
+.mfbtn{
+  flex:1;padding:10px;border-radius:7px;
+  font-family:var(--body);font-size:11px;font-weight:700;
+  cursor:pointer;border:none;transition:all .15s;
+}
+.mfbtn-p{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff}
+.mfbtn-p:hover{box-shadow:0 4px 14px rgba(220,38,38,.4)}
+.mfbtn-o{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.mfbtn-o:hover{border-color:var(--red);color:var(--red)}
+
+/* LOADING / EMPTY */
+.loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:40px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:11px;grid-column:1/-1}
+
+@media(max-width:640px){
+  .tb,.cov,.stats,.controls,.main{padding-left:14px;padding-right:14px}
+  .stats{flex-wrap:wrap}
+  .sv{min-width:50%;border-bottom:1px solid var(--border)}
+  .mgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="tb">
+  <div class="logo">
+    <div class="logo-ic">⚖️</div>
+    <div>
+      <div class="logo-nm">Accident AI</div>
+      <div class="logo-sb">Attorney Lead Portal</div>
+    </div>
+  </div>
+  <div class="tb-r">
+    <!-- THEME TOGGLE -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-option light active" id="theme-light">☀️ Light</span>
+      <span class="theme-option dark" id="theme-dark">🌙 Dark</span>
+    </div>
+    <div class="plan-pill" id="planPill">Loading...</div>
+    <div class="updated" id="updated">Loading...</div>
+    <button class="ref-btn" onclick="loadLeads()">↻ Refresh</button>
+  </div>
+</div>
+
+<!-- COVERAGE BANNER -->
+<div class="cov" id="covBanner">
+  <div class="cov-ic" id="covIc">📍</div>
+  <div>
+    <div class="cov-tag">Your Coverage Area</div>
+    <div class="cov-val" id="covVal">Loading...</div>
+    <div class="cov-states" id="covStates"></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats">
+  <div class="sv"><div class="sv-n b" id="stTotal">—</div><div class="sv-l">Your Leads</div></div>
+  <div class="sv"><div class="sv-n r" id="stHot">—</div><div class="sv-l">Hot Leads</div></div>
+  <div class="sv"><div class="sv-n y" id="stWarm">—</div><div class="sv-l">Warm Leads</div></div>
+  <div class="sv"><div class="sv-n g" id="stAvg">—</div><div class="sv-l">Avg Score</div></div>
+  <div class="sv"><div class="sv-n r" id="stTop">—</div><div class="sv-l">Top Score</div></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="sw">
+    <span class="sw-ic">🔍</span>
+    <input type="text" id="searchBox" placeholder="Search name, injury, state, accident type..." oninput="render()">
+  </div>
+  <div class="pills">
+    <button class="pill on" onclick="setFilter(this,'all')">All</button>
+    <button class="pill hp" onclick="setFilter(this,'hot')">🔴 Hot</button>
+    <button class="pill wp" onclick="setFilter(this,'warm')">🟡 Warm</button>
+    <button class="pill" onclick="setFilter(this,'cool')">🔵 Low</button>
+  </div>
+  <select class="sort-sel" id="sortSel" onchange="render()">
+    <option value="score">Score ↓</option>
+    <option value="name">Name A–Z</option>
+    <option value="state">State</option>
+    <option value="days">Days Since Accident</option>
+  </select>
+</div>
+
+<!-- LEADS GRID -->
+<div class="main">
+  <div id="mainContent">
+    <div class="loading"><div class="spinner"></div><p>Loading your leads...</p></div>
+  </div>
+</div>
+
+<!-- LEAD DETAIL MODAL -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal">
+    <div class="modal-top"></div>
+    <div class="mhd">
+      <div><div class="mhd-name" id="mName"></div><div class="mhd-sub" id="mSub"></div></div>
+      <button class="mclose" onclick="document.getElementById('overlay').classList.remove('show')">✕</button>
+    </div>
+    <div class="mbody" id="mBody"></div>
+    <div class="mfoot">
+      <button class="mfbtn mfbtn-p" id="mCall">📞 Call Lead</button>
+      <button class="mfbtn mfbtn-o" onclick="copyModal()">📋 Copy Details</button>
+      <button class="mfbtn mfbtn-o" onclick="document.getElementById('overlay').classList.remove('show')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== THEME TOGGLE =====
+function toggleTheme() {
+  const body = document.body;
+  const lightBtn = document.getElementById('theme-light');
+  const darkBtn  = document.getElementById('theme-dark');
+  const meta     = document.getElementById('theme-color');
+  body.classList.toggle('dark-theme');
+  const isDark = body.classList.contains('dark-theme');
+  lightBtn.classList.toggle('active', !isDark);
+  darkBtn.classList.toggle('active',   isDark);
+  meta.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+  localStorage.setItem('portal-theme', isDark ? 'dark' : 'light');
+}
+function loadThemePreference() {
+  const saved = localStorage.getItem('portal-theme');
+  if (saved === 'dark') {
+    document.body.classList.add('dark-theme');
+    document.getElementById('theme-light').classList.remove('active');
+    document.getElementById('theme-dark').classList.add('active');
+    document.getElementById('theme-color').setAttribute('content', '#020617');
+  }
+}
+
+// ===== CONFIG =====
+// Apps Script URL — hardcoded, connects automatically
+var API = 'https://script.google.com/macros/s/AKfycbxs8vw-jadNBh6SOq_uPdz6mMPGXQvoeMGoW7ZGbPbKTaBG1xvrvmST6Pmoc7NLtNM/exec';
+
+// URL params — pass ?plan=Gold&tier=1&states=TN|MS&firm=Smith+Law to customize
+var P            = new URLSearchParams(window.location.search);
+var PLAN         = P.get('plan')   || '';
+var TIER         = parseInt(P.get('tier') || '0', 10);
+var RAW          = P.get('states') || '';
+var FIRM         = P.get('firm')   || 'Your Firm';
+var STATE_FILTER = [];
+if (RAW && RAW !== 'ALL' && TIER !== 3) {
+  STATE_FILTER = RAW.split('|').map(function(s){return s.trim();}).filter(Boolean);
+}
+
+// Plan pill color
+var PCOLOR = TIER === 1 ? 'gold' : TIER === 2 ? 'blue' : 'red';
+
+// ===== INIT UI =====
+(function init() {
+  var pill = document.getElementById('planPill');
+  pill.textContent = PLAN || 'Attorney Portal';
+  pill.className   = 'plan-pill ' + PCOLOR;
+
+  if (TIER === 1) {
+    document.getElementById('covIc').textContent = '📍';
+    document.getElementById('covVal').textContent = STATE_FILTER[0] || '1 State';
+    document.getElementById('covStates').textContent = 'State Access — priority routing for 1 state';
+  } else if (TIER === 2) {
+    document.getElementById('covIc').textContent = '🗺';
+    document.getElementById('covVal').textContent = 'Regional Coverage — ' + STATE_FILTER.length + ' states';
+    document.getElementById('covStates').textContent = STATE_FILTER.join(' · ');
+  } else {
+    document.getElementById('covIc').textContent = '🌎';
+    document.getElementById('covVal').textContent = 'National Access — All 53 Locations';
+    document.getElementById('covStates').textContent = 'All 50 states + Washington DC + Puerto Rico + Virgin Islands';
+  }
+})();
+
+// ===== DATA =====
+var ALL = [], curFilter = 'all', curLead = null;
+
+function filterByPlan(leads) {
+  if (!STATE_FILTER.length) return leads;
+  return leads.filter(function(l) { return STATE_FILTER.indexOf(l['State'] || l.state) !== -1; });
+}
+
+async function loadLeads() {
+  document.getElementById('mainContent').innerHTML = '<div class="loading"><div class="spinner"></div><p>Fetching leads from Google Sheets...</p></div>';
+  document.getElementById('updated').textContent = 'Refreshing...';
+  try {
+    var r = await fetch(API + '?action=get_leads');
+    var j = await r.json();
+    if (j.status !== 'success') throw new Error('no success');
+    // Map sheet columns to lead objects
+    ALL = filterByPlan((j.leads || []).map(mapLead));
+    var t = new Date();
+    document.getElementById('updated').textContent = 'Updated ' + t.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  } catch(e) {
+    ALL = filterByPlan(getSample());
+    document.getElementById('updated').textContent = 'Sample data (connect API to load live leads)';
+  }
+  updateStats();
+  render();
+}
+
+// Map raw sheet row object to normalized lead object
+function mapLead(row) {
+  return {
+    id:           row['Timestamp'] ? 'ACC-' + new Date(row['Timestamp']).getTime().toString(36).toUpperCase().slice(-6) : 'ACC-???',
+    name:         row['Name']             || '',
+    phone:        row['Phone']            || '',
+    email:        row['Email']            || '',
+    state:        row['State']            || '',
+    accidentDate: row['Accident Date']    || '',
+    daysSince:    row['Days Since']       || '',
+    accidentType: row['Accident Type']    || '',
+    atFault:      row['At Fault']         || '',
+    police:       row['Police Report']    || '',
+    severity:     row['Injury Severity']  || '',
+    injuries:     row['Injuries']         || '',
+    medSought:    row['Sought Medical']   || '',
+    hospitalized: row['Hospitalized']     || '',
+    missedWork:   row['Missed Work']      || '',
+    injuryDesc:   row['Injury Description'] || '',
+    hasInsurance: row['Has Insurance']    || '',
+    otherIns:     row['Other Driver Insured'] || '',
+    claimFiled:   row['Claim Filed']      || '',
+    settlement:   row['Settlement Offered'] || '',
+    hasAttorney:  row['Has Attorney']     || '',
+    damageEst:    row['Damage Estimate']  || '',
+    score:        parseInt(row['SCORE'])  || 0,
+    grade:        row['GRADE']            || '',
+    tier:         row['TIER']             || '',
+    timestamp:    row['Timestamp']        || ''
+  };
+}
+
+function updateStats() {
+  var hot  = ALL.filter(function(l){return tierClass(l.tier) === 'hot';}).length;
+  var warm = ALL.filter(function(l){return tierClass(l.tier) === 'warm';}).length;
+  var avg  = ALL.length ? Math.round(ALL.reduce(function(a,l){return a+l.score;}, 0) / ALL.length) : 0;
+  var top  = ALL.length ? Math.max.apply(null, ALL.map(function(l){return l.score;})) : 0;
+  document.getElementById('stTotal').textContent = ALL.length;
+  document.getElementById('stHot').textContent   = hot;
+  document.getElementById('stWarm').textContent  = warm;
+  document.getElementById('stAvg').textContent   = avg;
+  document.getElementById('stTop').textContent   = top;
+}
+
+function tierClass(t) {
+  if (!t) return 'cool';
+  t = t.toLowerCase();
+  if (t.includes('hot'))  return 'hot';
+  if (t.includes('warm')) return 'warm';
+  return 'cool';
+}
+
+function setFilter(btn, f) {
+  document.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  curFilter = f;
+  render();
+}
+
+function getFiltered() {
+  var q = document.getElementById('searchBox').value.toLowerCase().trim();
+  var f = ALL.filter(function(l) {
+    var mf = curFilter === 'all' || tierClass(l.tier) === curFilter;
+    var ms = !q || [l.name, l.injuries, l.state, l.accidentType].join(' ').toLowerCase().includes(q);
+    return mf && ms;
+  });
+  var s = document.getElementById('sortSel').value;
+  f.sort(function(a, b) {
+    if (s === 'score') return b.score - a.score;
+    if (s === 'name')  return (a.name  || '').localeCompare(b.name  || '');
+    if (s === 'state') return (a.state || '').localeCompare(b.state || '');
+    if (s === 'days')  return parseInt(b.daysSince || 0) - parseInt(a.daysSince || 0);
+    return 0;
+  });
+  return f;
+}
+
+function render() {
+  var leads = getFiltered();
+  var main  = document.getElementById('mainContent');
+  if (!leads.length) {
+    main.innerHTML = '<div class="grid"><div class="empty">No leads match this filter in your coverage area.</div></div>';
+    return;
+  }
+  main.innerHTML = '<div class="grid">' + leads.map(cardHTML).join('') + '</div>';
+}
+
+// ===== SCORE RING =====
+function sc(s)  { return s >= 80 ? 'var(--red)' : s >= 60 ? 'var(--yellow)' : 'var(--blue)'; }
+function sg(s)  { return s >= 80 ? 'rgba(220,38,38,.5)' : s >= 60 ? 'rgba(234,179,8,.4)' : 'rgba(37,99,235,.35)'; }
+function ring(score) {
+  var col = sc(score), r = 21, cx = 27, ci = 2 * Math.PI * r, d = ci * (score / 100);
+  return '<div class="ring-wrap"><svg width="54" height="54" viewBox="0 0 54 54"><circle cx="'+cx+'" cy="'+cx+'" r="'+r+'" fill="none" stroke="var(--bg3)" stroke-width="4"/><circle cx="'+cx+'" cy="'+cx+'" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4" stroke-dasharray="'+ci+'" stroke-dashoffset="'+(ci-d)+'" stroke-linecap="round" filter="drop-shadow(0 0 4px '+sg(score)+')"/></svg><div class="ring-inner"><div class="ring-num" style="color:'+col+'">'+score+'</div><div class="ring-lbl">/ 100</div></div></div>';
+}
+
+// ===== CARD HTML =====
+function cardHTML(l) {
+  var t   = tierClass(l.tier);
+  var lbl = t === 'hot' ? 'Hot Lead' : t === 'warm' ? 'Warm Lead' : 'Low Priority';
+  var urgency = parseInt(l.daysSince) > 365 ? ' 🚨 ' + l.daysSince + ' days' : l.daysSince ? l.daysSince + ' days ago' : '';
+  var chips = [l.severity, l.atFault === 'No' ? '✅ Not at fault' : '', l.hospitalized === 'Yes' ? '🏥 Hospitalized' : '', l.police === 'Yes' ? '📋 Police report' : ''].filter(Boolean).slice(0, 3)
+    .map(function(f){ return '<span class="fc">'+f+'</span>'; }).join('');
+
+  return '<div class="card" onclick="openModal(\''+l.id+'\')">'
+    + '<div class="cs '+t+'"></div>'
+    + '<div class="cb">'
+    + '<div class="cr1"><div><div class="cname">'+(l.name||'Unknown')+'</div><div class="csub">'+l.id+' &middot; '+(l.state||'—')+(urgency?' &middot; '+urgency:'')+'</div></div>'+ring(l.score)+'</div>'
+    + '<div class="acc-type">'+(l.accidentType||'Accident Type Not Specified')+'</div>'
+    + '<div class="ctier '+t+'">'+lbl+' &nbsp;&middot;&nbsp; Grade '+(l.grade||'—')+'</div>'
+    + '<div class="igrid">'
+    + '<div class="ic">At Fault<strong>'+(l.atFault||'—')+'</strong></div>'
+    + '<div class="ic">Severity<strong>'+shortSev(l.severity)+'</strong></div>'
+    + '<div class="ic">Medical<strong>'+shortMed(l.medSought)+'</strong></div>'
+    + '<div class="ic">Damage<strong>'+(l.damageEst||'—')+'</strong></div>'
+    + '</div>'
+    + (chips ? '<div class="fchips">'+chips+'</div>' : '')
+    + '</div>'
+    + '<div class="cfoot"><button class="cbtn cbtn-p" onclick="event.stopPropagation();openModal(\''+l.id+'\')">View Profile</button><button class="cbtn cbtn-o" onclick="event.stopPropagation();copyCard(\''+l.id+'\')">Copy</button></div>'
+    + '</div>';
+}
+
+function shortSev(s) { if(!s) return '—'; if(s.includes('Critical')) return 'Critical'; if(s.includes('Serious')) return 'Serious'; if(s.includes('Significant')) return 'Significant'; if(s.includes('Moderate')) return 'Moderate'; return 'Minor'; }
+function shortMed(s) { if(!s) return '—'; if(s.includes('Same')) return 'Same Day'; if(s.includes('Week')) return 'Within Week'; return 'Not Yet'; }
+
+// ===== MODAL =====
+function openModal(id) {
+  curLead = ALL.find(function(l){ return l.id === id; });
+  if (!curLead) return;
+  var l   = curLead;
+  var col = sc(l.score);
+  var t   = tierClass(l.tier);
+  var lbl = t === 'hot' ? 'Hot Lead' : t === 'warm' ? 'Warm Lead' : 'Low Priority';
+  var days = l.daysSince ? l.daysSince + ' days ago' : '—';
+  var urgBadge = parseInt(l.daysSince) > 365 ? ' 🚨 URGENT' : parseInt(l.daysSince) > 180 ? ' ⚠️ ACT SOON' : '';
+
+  document.getElementById('mName').textContent = l.name || 'Unknown';
+  document.getElementById('mSub').textContent  = l.id + ' · ' + (l.state || '') + (l.timestamp ? ' · ' + new Date(l.timestamp).toLocaleDateString() : '');
+
+  var cb = document.getElementById('mCall');
+  if (l.phone) { cb.textContent = '📞 Call ' + l.phone; cb.onclick = function(){ window.location.href = 'tel:' + l.phone.replace(/\D/g, ''); }; }
+  else { cb.textContent = '📞 No Phone on File'; cb.onclick = null; }
+
+  document.getElementById('mBody').innerHTML =
+    // SCORE HERO
+    '<div class="mscore"><div><div class="ms-n" style="color:'+col+'">'+l.score+'</div><div class="ms-lbl">Attorney Score'+urgBadge+'</div></div><div><div class="ms-badge '+t+'">'+lbl+'</div><div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:5px">Grade '+(l.grade||'—')+'</div></div></div>'
+
+    // ACCIDENT DETAILS
+    + '<div class="msec"><div class="msec-t">Accident Details</div><div class="mgrid">'
+    + mc('Accident Date', l.accidentDate)
+    + mc('Days Since', days)
+    + mc('Accident Type', l.accidentType)
+    + mc('At Fault', l.atFault)
+    + mc('Police Report', l.police)
+    + mc('Damage Estimate', l.damageEst)
+    + '</div></div>'
+
+    // INJURIES
+    + '<div class="msec"><div class="msec-t">Injuries &amp; Medical</div><div class="mgrid">'
+    + mc('Severity', l.severity)
+    + mc('Injuries', l.injuries)
+    + mc('Medical Treatment', l.medSought)
+    + mc('Hospitalized', l.hospitalized)
+    + mc('Missed Work', l.missedWork)
+    + mc('Has Attorney', l.hasAttorney)
+    + '</div></div>'
+
+    // INSURANCE
+    + '<div class="msec"><div class="msec-t">Insurance &amp; Claims</div><div class="mgrid">'
+    + mc('Has Insurance', l.hasInsurance)
+    + mc('Other Driver Ins.', l.otherIns)
+    + mc('Claim Filed', l.claimFiled)
+    + mc('Settlement Offered', l.settlement)
+    + '</div></div>'
+
+    // IMPACT STATEMENT
+    + (l.injuryDesc ? '<div class="msec"><div class="msec-t">Impact Statement</div><div style="font-size:12px;color:var(--muted);line-height:1.7;background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:7px;padding:11px 13px">' + l.injuryDesc + '</div></div>' : '')
+
+    // CONTACT
+    + '<div class="msec"><div class="msec-t">Contact Information</div><div class="contact-block"><div class="contact-t">Ready to Contact</div>'
+    + cr('Phone', l.phone ? '<a href="tel:'+l.phone.replace(/\D/g,'')+'">'+l.phone+'</a>' : '—')
+    + cr('Email', l.email ? '<a href="mailto:'+l.email+'">'+l.email+'</a>' : '—')
+    + cr('State', l.state || '—')
+    + '</div></div>';
+
+  document.getElementById('overlay').classList.add('show');
+}
+
+function mc(l, v) { return '<div class="mcell"><div class="mcell-l">'+l+'</div><div class="mcell-v">'+(v||'—')+'</div></div>'; }
+function cr(l, v) { return '<div class="crow"><span class="c-lbl">'+l+'</span><span class="c-val">'+v+'</span></div>'; }
+function closeOverlay(e) { if(e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('show'); }
+
+function copyCard(id) {
+  var l = ALL.find(function(x){ return x.id === id; });
+  if (!l) return;
+  navigator.clipboard.writeText([l.name, l.state, 'Score: '+l.score, 'Grade: '+l.grade, l.accidentType, l.severity, 'Phone: '+(l.phone||'—'), 'Email: '+(l.email||'—'), 'Days Since: '+l.daysSince].join('\n')).catch(function(){});
+}
+
+function copyModal() {
+  if (!curLead) return;
+  var l = curLead;
+  navigator.clipboard.writeText([
+    'ACCIDENT AI LEAD PROFILE','--------------------',
+    'ID: '+l.id, 'Name: '+(l.name||'—'), 'Phone: '+(l.phone||'—'), 'Email: '+(l.email||'—'),
+    'State: '+(l.state||'—'), 'Score: '+l.score+' / 100', 'Grade: '+(l.grade||'—'), 'Tier: '+(l.tier||'—'),
+    'Accident Date: '+(l.accidentDate||'—'), 'Days Since: '+(l.daysSince||'—'),
+    'Accident Type: '+(l.accidentType||'—'), 'At Fault: '+(l.atFault||'—'),
+    'Injury Severity: '+(l.severity||'—'), 'Injuries: '+(l.injuries||'—'),
+    'Hospitalized: '+(l.hospitalized||'—'), 'Missed Work: '+(l.missedWork||'—'),
+    'Damage Estimate: '+(l.damageEst||'—'), 'Has Attorney: '+(l.hasAttorney||'—')
+  ].join('\n')).catch(function(){});
+}
+
+// ===== SAMPLE DATA (shown if API not connected) =====
+function getSample() {
+  var pool = ['Tennessee','Mississippi','Georgia','Alabama','Texas','Florida','Ohio','Pennsylvania','California'];
+  var useSt = STATE_FILTER.length ? STATE_FILTER : pool;
+  function rs(){ return useSt[Math.floor(Math.random()*useSt.length)]; }
+  return [
+    {id:'ACC-001',name:'James R. Morrison',phone:'(615) 555-0101',email:'jmorrison@email.com',state:rs(),accidentDate:'2025-11-15',daysSince:105,accidentType:'Commercial Truck',atFault:'No',police:'Yes',severity:'Serious — Surgery / Long-term',injuries:'Fractured spine, broken ribs',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'3+ Months',injuryDesc:'Was hit by an 18-wheeler at a red light. Required emergency surgery and is still in physical therapy.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$100K-$500K',score:94,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-12-01'},
+    {id:'ACC-002',name:'Patricia L. Williams',phone:'(601) 555-0202',email:'pwilliams@email.com',state:rs(),accidentDate:'2025-12-02',daysSince:88,accidentType:'Rideshare',atFault:'No',police:'Yes',severity:'Significant — Requires Ongoing Treatment',injuries:'TBI, whiplash, shoulder injury',medSought:'Yes — Same Day',hospitalized:'No',missedWork:'1-3 Months',injuryDesc:'Uber driver ran red light at high speed. Currently receiving weekly physical therapy and neurological evaluations.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$25K-$100K',score:81,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-12-15'},
+    {id:'ACC-003',name:'Robert T. Jackson',phone:'(404) 555-0303',email:'rjackson@email.com',state:rs(),accidentDate:'2026-01-10',daysSince:49,accidentType:'Auto vs Auto',atFault:'No',police:'Yes',severity:'Moderate — Visible Injury',injuries:'Whiplash, back pain',medSought:'Yes — Within Week',hospitalized:'No',missedWork:'1 Week',injuryDesc:'Rear-ended at a stop sign. Experiencing chronic neck and back pain.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'No',settlement:'No',hasAttorney:'No',damageEst:'$5K-$25K',score:64,grade:'B',tier:'🟡 Warm Lead',timestamp:'2026-01-20'},
+    {id:'ACC-004',name:'Sandra M. Davis',phone:'(615) 555-0404',email:'sdavis@email.com',state:rs(),accidentDate:'2025-10-20',daysSince:131,accidentType:'Hit & Run / Uninsured',atFault:'No',police:'Yes',severity:'Critical — Life-altering / Permanent',injuries:'Paralysis — lower body, traumatic brain injury',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'Permanently Unable',injuryDesc:'Hit by uninsured driver at freeway speed. Paralyzed from the waist down. Currently at inpatient rehab facility.',hasInsurance:'Yes',otherIns:'No',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$500K+',score:97,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-11-01'},
+    {id:'ACC-005',name:'Michael A. Thompson',phone:'(901) 555-0505',email:'mthompson@email.com',state:rs(),accidentDate:'2026-01-28',daysSince:31,accidentType:'Commercial Truck',atFault:'Unknown',police:'Pending',severity:'Significant — Requires Ongoing Treatment',injuries:'Knee injury, multiple lacerations',medSought:'Yes — Same Day',hospitalized:'No',missedWork:'2-4 Weeks',injuryDesc:'Sideswiped by delivery truck on the highway. Knee surgery scheduled.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'No',settlement:'No',hasAttorney:'No',damageEst:'$25K-$100K',score:74,grade:'B',tier:'🟡 Warm Lead',timestamp:'2026-02-01'},
+    {id:'ACC-006',name:'Dorothy K. Henderson',phone:'(615) 555-0606',email:'dhenderson@email.com',state:rs(),accidentDate:'2025-09-15',daysSince:166,accidentType:'Auto vs Auto',atFault:'No',police:'Yes',severity:'Serious — Surgery / Long-term',injuries:'Herniated discs — L4-L5, S1',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'3+ Months',injuryDesc:'T-boned at an intersection. Two herniated discs requiring surgical intervention and long-term pain management.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'Offered but rejected',hasAttorney:'No',damageEst:'$100K-$500K',score:89,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-10-01'}
+  ];
+}
+
+// ===== START =====
+loadThemePreference();
+loadLeads();
+</script>
+</body>
+</html>
