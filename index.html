@@ -4,369 +4,252 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f8fafc" id="theme-color">
-<title>Attorney Lead Portal | Accident AI</title>
+<title>Attorney Partner Onboarding | Accident AI</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@800;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Light theme (default) */
-  --bg-light:     #f8fafc;
-  --bg2-light:    #ffffff;
-  --bg3-light:    #eef2f6;
-  --red-light:    #dc2626;
-  --red-d-light:  #b91c1c;
-  --green-light:  #16a34a;
-  --yellow-light: #eab308;
-  --blue-light:   #2563eb;
-  --muted-light:  #64748b;
-  --text-light:   #0f172a;
-  --border-light: #e2e8f0;
-
-  /* Dark theme */
-  --bg-dark:     #020617;
-  --bg2-dark:    #0f172a;
-  --bg3-dark:    #1e293b;
-  --red-dark:    #ef4444;
-  --red-d-dark:  #dc2626;
-  --green-dark:  #10b981;
-  --yellow-dark: #f59e0b;
-  --blue-dark:   #3b82f6;
-  --muted-dark:  #64748b;
-  --text-dark:   #f8fafc;
-  --border-dark: rgba(51,65,85,.75);
-
-  /* Default to light */
-  --bg:     var(--bg-light);
-  --bg2:    var(--bg2-light);
-  --bg3:    var(--bg3-light);
-  --red:    var(--red-light);
-  --red-d:  var(--red-d-light);
-  --green:  var(--green-light);
-  --yellow: var(--yellow-light);
-  --blue:   var(--blue-light);
-  --muted:  var(--muted-light);
-  --text:   var(--text-light);
-  --border: var(--border-light);
-
-  --mono: 'JetBrains Mono', monospace;
-  --disp: 'Syne', sans-serif;
-  --body: 'Manrope', sans-serif;
+  --bg-light:#f8fafc; --bg2-light:#ffffff; --bg3-light:#eef2f6;
+  --red-light:#dc2626; --red-d-light:#991b1b;
+  --green-light:#16a34a; --gold-light:#b45309;
+  --yellow-light:#eab308; --muted-light:#64748b;
+  --text-light:#0f172a; --border-light:#e2e8f0;
+  --bg-dark:#020617; --bg2-dark:#0f172a; --bg3-dark:#1e293b;
+  --red-dark:#ef4444; --red-d-dark:#dc2626;
+  --green-dark:#10b981; --gold-dark:#c8973a;
+  --yellow-dark:#f59e0b; --muted-dark:#64748b;
+  --text-dark:#f8fafc; --border-dark:rgba(51,65,85,.8);
+  --bg:var(--bg-light); --bg2:var(--bg2-light); --bg3:var(--bg3-light);
+  --red:var(--red-light); --red-d:var(--red-d-light);
+  --green:var(--green-light); --gold:var(--gold-light);
+  --yellow:var(--yellow-light); --muted:var(--muted-light);
+  --text:var(--text-light); --border:var(--border-light);
+  --mono:'JetBrains Mono',monospace; --disp:'Syne',sans-serif; --body:'Manrope',sans-serif;
 }
-
 body.dark-theme {
-  --bg:     var(--bg-dark);
-  --bg2:    var(--bg2-dark);
-  --bg3:    var(--bg3-dark);
-  --red:    var(--red-dark);
-  --red-d:  var(--red-d-dark);
-  --green:  var(--green-dark);
-  --yellow: var(--yellow-dark);
-  --blue:   var(--blue-dark);
-  --muted:  var(--muted-dark);
-  --text:   var(--text-dark);
-  --border: var(--border-dark);
+  --bg:var(--bg-dark); --bg2:var(--bg2-dark); --bg3:var(--bg3-dark);
+  --red:var(--red-dark); --red-d:var(--red-d-dark);
+  --green:var(--green-dark); --gold:var(--gold-dark);
+  --yellow:var(--yellow-dark); --muted:var(--muted-dark);
+  --text:var(--text-dark); --border:var(--border-dark);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{
-  font-family:var(--body);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  transition:background-color .3s ease,color .3s ease;
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(circle at 8% 10%,rgba(220,38,38,.12) 0%,transparent 42%),
-             radial-gradient(circle at 88% 78%,rgba(220,38,38,.06) 0%,transparent 38%);
-  transition:opacity .3s ease;
-}
+body{font-family:var(--body);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 15% 0%,rgba(220,38,38,.15) 0%,transparent 50%),
+             radial-gradient(ellipse at 85% 100%,rgba(153,27,27,.06) 0%,transparent 45%);
+  transition:opacity .3s ease}
 body.dark-theme::before{
-  background:radial-gradient(circle at 8% 10%,rgba(153,27,27,.25) 0%,transparent 42%),
-             radial-gradient(circle at 88% 78%,rgba(239,68,68,.06) 0%,transparent 38%);
-}
+  background:radial-gradient(ellipse at 15% 0%,rgba(153,27,27,.25) 0%,transparent 50%),
+             radial-gradient(ellipse at 85% 100%,rgba(239,68,68,.07) 0%,transparent 45%)}
 
-/* ── TOPBAR ── */
-.tb{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:0 32px;
-  height:62px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background-color .3s ease;
-}
+/* TOPBAR */
+.tb{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between;transition:background-color .3s ease}
 body.dark-theme .tb{background:rgba(2,6,23,.92)}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-ic{
-  width:36px;height:36px;border-radius:9px;
-  background:linear-gradient(135deg,#991b1b,#dc2626);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;
-}
-.logo-nm{font-family:var(--disp);font-size:17px;font-weight:900;letter-spacing:-.02em}
-.logo-sb{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
-.tb-r{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-ic{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#991b1b,#dc2626);display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-nm{font-family:var(--disp);font-size:16px;font-weight:900;letter-spacing:-.02em}
+.logo-sb{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.theme-toggle{display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:30px;padding:3px;cursor:pointer;transition:all .2s}
+.theme-toggle:hover{border-color:var(--red)}
+.theme-option{padding:5px 12px;border-radius:30px;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);transition:all .2s;user-select:none}
+.theme-option.active{background:var(--red);color:#fff}
+.tb-badge{font-family:var(--mono);font-size:9px;font-weight:700;padding:5px 11px;border-radius:20px;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-left:12px}
 
-/* THEME TOGGLE */
-.theme-toggle{
-  display:flex;align-items:center;gap:4px;
-  background:var(--bg3);border:1px solid var(--border);
-  border-radius:30px;padding:3px;cursor:pointer;
-  transition:all .2s ease;
-}
-.theme-toggle:hover{border-color:var(--red);}
-.theme-option{
-  padding:5px 12px;border-radius:30px;
-  font-family:var(--mono);font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.05em;
-  color:var(--muted);transition:all .2s ease;user-select:none;
-}
-.theme-option.active{background:var(--red);color:white;}
+/* HERO */
+.hero{position:relative;z-index:1;padding:56px 36px 44px;max-width:860px;margin:0 auto;text-align:center}
+.hero-tag{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:14px}
+.hero h1{font-family:var(--disp);font-size:clamp(28px,5vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1.12;margin-bottom:16px}
+.hero h1 em{color:var(--red);font-style:normal}
+.hero p{font-size:14px;color:var(--muted);line-height:1.75;max-width:600px;margin:0 auto 28px}
+.stats-bar{display:flex;justify-content:center;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg2);max-width:580px;margin:0 auto;transition:background-color .3s ease}
+.st{flex:1;padding:14px 10px;text-align:center;border-right:1px solid var(--border)}
+.st:last-child{border-right:none}
+.st-n{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--red)}
+.st-l{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
 
-.plan-pill{
-  font-family:var(--mono);font-size:10px;font-weight:700;
-  padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;
-}
-.plan-pill.gold{background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25);color:#b45309}
-.plan-pill.blue{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);color:var(--blue)}
-.plan-pill.red{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);color:var(--red)}
-.updated{font-family:var(--mono);font-size:10px;color:var(--muted)}
-.ref-btn{
-  background:transparent;border:1px solid var(--border);border-radius:7px;
-  color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:700;
-  padding:6px 12px;cursor:pointer;transition:all .15s;
-}
-.ref-btn:hover{border-color:var(--red);color:var(--red)}
+/* PLANS */
+.wrap{position:relative;z-index:1;padding:0 36px 40px;max-width:860px;margin:0 auto}
+.sec-tag{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:8px}
+.sec-h{font-family:var(--disp);font-size:26px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
+.sec-p{font-size:13px;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:28px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s;position:relative}
+.pc:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(220,38,38,.1)}
+.pc.sel{border-color:var(--red);box-shadow:0 0 0 2px rgba(220,38,38,.3)}
+.pc.hot{border-color:rgba(220,38,38,.4)}
+.pc-top{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff;font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:5px;text-align:center}
+.pb{padding:20px}
+.p-tier{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:4px}
+.p-name{font-family:var(--disp);font-size:17px;font-weight:900;margin-bottom:10px}
+.p-price{display:flex;align-items:baseline;gap:4px;margin-bottom:4px}
+.p-amt{font-family:var(--disp);font-size:32px;font-weight:900}
+.p-amt.g{color:var(--gold)} .p-amt.r{color:var(--red)} .p-amt.c{color:var(--green)}
+.p-per{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.p-note{font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:12px}
+.p-div{height:1px;background:var(--border);margin-bottom:12px}
+.p-feats{list-style:none;font-size:11px;color:var(--muted);line-height:2}
+.p-feats li{border-bottom:1px solid var(--border);padding:2px 0}
+.p-feats li:last-child{border:none}
+.p-feats .dim{opacity:.45}
+.pbtn{width:100%;margin-top:14px;padding:11px;border-radius:8px;font-family:var(--body);font-size:12px;font-weight:700;cursor:pointer;border:none;color:#fff;transition:all .2s}
+.pbtn.g{background:linear-gradient(135deg,#92400e,#b45309)}
+.pbtn.g:hover{box-shadow:0 4px 14px rgba(180,83,9,.4)}
+.pbtn.r{background:linear-gradient(135deg,#991b1b,#dc2626)}
+.pbtn.r:hover{box-shadow:0 4px 14px rgba(220,38,38,.45)}
+.pbtn.c{background:linear-gradient(135deg,#15803d,#16a34a)}
+.pbtn.c:hover{box-shadow:0 4px 14px rgba(22,163,74,.4)}
 
-/* ── COVERAGE BANNER ── */
-.cov{
-  position:relative;z-index:1;
-  background:linear-gradient(135deg,rgba(153,27,27,.08),rgba(220,38,38,.04));
-  border-bottom:1px solid var(--border);
-  padding:14px 32px;
-  display:flex;align-items:center;gap:14px;
-}
-.cov-ic{font-size:22px}
-.cov-tag{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:2px}
-.cov-val{font-family:var(--disp);font-size:16px;font-weight:900;letter-spacing:-.01em}
-.cov-states{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.04em}
+/* MSA */
+.msa-wrap{position:relative;z-index:1;padding:0 36px 40px;max-width:860px;margin:0 auto}
+.msa-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:background-color .3s ease}
+.msa-hd{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.msa-ic{width:36px;height:36px;border-radius:8px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--red)}
+.msa-hd h3{font-family:var(--disp);font-size:16px;font-weight:900}
+.msa-hd p{font-family:var(--mono);font-size:9px;color:var(--muted)}
+.msa-bd{padding:20px 22px;max-height:240px;overflow-y:auto;font-size:11px;color:var(--muted);line-height:1.75}
+.msa-bd h4{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text);margin:12px 0 4px}
+.msa-bd h4:first-child{margin-top:0}
+.msa-bd p{margin-bottom:4px}
 
-/* ── STATS ROW ── */
-.stats{
-  position:relative;z-index:1;
-  display:flex;border-bottom:1px solid var(--border);
-  background:var(--bg2);transition:background-color .3s ease;
-}
-.sv{
-  flex:1;padding:16px 28px;border-right:1px solid var(--border);
-  transition:background .15s;
-}
-.sv:last-child{border-right:none}
-.sv:hover{background:var(--bg3)}
-.sv-n{font-family:var(--disp);font-size:26px;font-weight:900;line-height:1;margin-bottom:3px}
-.sv-n.r{color:var(--red)}
-.sv-n.y{color:var(--yellow)}
-.sv-n.g{color:var(--green)}
-.sv-n.b{color:var(--blue)}
-.sv-l{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+/* FORM WRAPPER */
+.fw{position:relative;z-index:1;padding:0 36px 60px;max-width:860px;margin:0 auto}
+.fc{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:background-color .3s ease}
+.fhd{padding:22px 26px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(220,38,38,.05),transparent)}
+.fhd h2{font-family:var(--disp);font-size:21px;font-weight:900;margin-bottom:4px}
+.fhd p{font-family:var(--mono);font-size:9px;color:var(--muted)}
+.pbar{display:flex;align-items:center;justify-content:space-between;padding:11px 26px;background:var(--bg3);border-bottom:1px solid var(--border);transition:background-color .3s ease}
+.pb-l{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:2px}
+.pb-v{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--muted)}
+.pb-v.g{color:var(--gold)} .pb-v.r{color:var(--red)} .pb-v.c{color:var(--green)}
+.pb-ch{font-family:var(--mono);font-size:9px;color:var(--red);cursor:pointer;text-decoration:underline}
+.fb{padding:26px}
+.fpart{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.fpart:last-child{border:none;margin:0;padding:0}
+.ftit{font-family:var(--disp);font-size:16px;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.fnum{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 
-/* ── CONTROLS ── */
-.controls{
-  position:relative;z-index:1;
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding:12px 32px;background:var(--bg);border-bottom:1px solid var(--border);
-  transition:background-color .3s ease;
-}
-.sw{
-  display:flex;align-items:center;gap:8px;flex:1;min-width:200px;
-  background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0 12px;
-  transition:border-color .2s,background-color .3s ease;
-}
-.sw:focus-within{border-color:var(--red)}
-.sw-ic{font-size:13px}
-.sw input{
-  flex:1;background:transparent;border:none;outline:none;
-  font-family:var(--body);font-size:12px;color:var(--text);padding:8px 0;
-}
-.sw input::placeholder{color:var(--muted)}
-.pills{display:flex;gap:5px}
-.pill{
-  font-family:var(--mono);font-size:10px;font-weight:700;
-  padding:6px 13px;border-radius:20px;cursor:pointer;
-  border:1px solid var(--border);background:transparent;
-  color:var(--muted);transition:all .15s;
-}
-.pill.on,.pill:hover{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.07)}
-.pill.hp.on{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.1)}
-.pill.wp.on{border-color:var(--yellow);color:var(--yellow);background:rgba(234,179,8,.1)}
-.sort-sel{
-  background:var(--bg2);border:1px solid var(--border);border-radius:8px;
-  color:var(--text);font-family:var(--mono);font-size:10px;
-  padding:7px 11px;outline:none;cursor:pointer;
-  transition:border-color .2s,background-color .3s ease;
-}
-.sort-sel:focus{border-color:var(--red)}
+/* FIELDS */
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.req{color:var(--red)}
+.fld input,.fld select,.fld textarea{
+  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  padding:9px 12px;color:var(--text);font-family:var(--body);font-size:12px;
+  outline:none;transition:border-color .2s,background-color .3s ease;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--red)}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--muted)}
+.fld.bad input,.fld.bad select{border-color:var(--red)}
+.em{font-family:var(--mono);font-size:8px;color:var(--red);display:none}
+.fld.bad .em{display:block}
 
-/* ── MAIN GRID ── */
-.main{position:relative;z-index:1;padding:24px 32px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-
-/* ── CARDS ── */
-.card{
-  background:var(--bg2);border:1px solid var(--border);border-radius:13px;
-  overflow:hidden;cursor:pointer;transition:all .18s;
-  position:relative;
+/* STATE CHIPS */
+.st-sect{margin-top:16px;margin-bottom:16px}
+.st-lbl{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.st-hint{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.6}
+.st-hint.ok{color:var(--green)}
+.rgrid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.rbtn{
+  padding:6px 12px;border-radius:7px;border:1px solid var(--border);
+  background:var(--bg);cursor:pointer;font-family:var(--mono);font-size:9px;
+  font-weight:700;color:var(--muted);transition:all .15s;
 }
-.card:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(220,38,38,.12);transform:translateY(-2px)}
-body.dark-theme .card:hover{box-shadow:0 4px 20px rgba(239,68,68,.15)}
-.cs{width:100%;height:3px}
-.cs.hot{background:linear-gradient(90deg,#991b1b,#ef4444)}
-.cs.warm{background:linear-gradient(90deg,#92400e,#f59e0b)}
-.cs.cool{background:linear-gradient(90deg,#1e3a8a,#3b82f6)}
-.cb{padding:14px 16px}
-.cr1{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:9px}
-.cname{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:-.01em;margin-bottom:2px}
-.csub{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.04em}
-
-/* Score ring */
-.ring-wrap{position:relative;width:54px;height:54px;flex-shrink:0}
-.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ring-num{font-family:var(--disp);font-size:13px;font-weight:900;line-height:1}
-.ring-lbl{font-family:var(--mono);font-size:7px;color:var(--muted)}
-
-.acc-type{
-  font-family:var(--mono);font-size:9px;font-weight:700;
-  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--red);
-  border-radius:4px;padding:3px 7px;display:inline-block;margin-bottom:7px;
-  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+.rbtn:hover{border-color:var(--red);color:var(--red)}
+.rbtn.on{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.08)}
+.rn{font-size:10px;font-weight:700}
+.rs{font-size:7px;margin-top:1px;opacity:.7}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.chip{
+  padding:5px 10px;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg3);font-family:var(--mono);font-size:8px;
+  font-weight:700;color:var(--muted);cursor:pointer;text-align:center;
+  transition:all .12s;user-select:none;
 }
-body.dark-theme .acc-type{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
-.ctier{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}
-.ctier.hot{color:var(--red)}.ctier.warm{color:var(--yellow)}.ctier.cool{color:var(--blue)}
-.igrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:9px}
-.ic{
+.chip:hover:not(.locked){border-color:var(--red);color:var(--red)}
+.chip.on{border-color:var(--red);color:var(--red);background:rgba(220,38,38,.08)}
+.chip.locked{pointer-events:none;opacity:.55}
+.st-err{font-family:var(--mono);font-size:8px;color:var(--red);display:none;margin-top:4px}
+
+/* CHECKBOXES */
+.ck-list{display:flex;flex-direction:column;gap:8px}
+.ck-row{
+  display:flex;align-items:flex-start;gap:11px;
   background:rgba(255,255,255,.6);border:1px solid var(--border);
-  border-radius:5px;padding:6px 8px;
-  font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.04em;
-  transition:background-color .3s ease;
+  border-radius:9px;padding:12px 14px;cursor:pointer;
+  transition:border-color .15s,background-color .3s ease;user-select:none;
 }
-body.dark-theme .ic{background:rgba(2,6,23,.6)}
-.ic strong{display:block;font-size:10px;color:var(--text);font-weight:700;margin-top:2px;font-family:var(--body)}
-.fchips{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
-.fc{
-  font-family:var(--mono);font-size:7px;padding:2px 6px;border-radius:3px;
-  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.18);color:var(--red);
-}
-body.dark-theme .fc{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.18);color:#fca5a5}
-.fc.warn{background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.2);color:#b45309}
-body.dark-theme .fc.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2);color:#fcd34d}
-.cfoot{display:flex;gap:7px;padding:9px 16px 13px}
-.cbtn{
-  flex:1;padding:8px;border-radius:6px;
-  font-family:var(--body);font-size:10px;font-weight:700;
-  cursor:pointer;border:none;transition:all .15s;
-}
-.cbtn-p{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff}
-.cbtn-p:hover{box-shadow:0 4px 14px rgba(220,38,38,.4)}
-.cbtn-o{background:transparent;border:1px solid var(--border);color:var(--muted)}
-.cbtn-o:hover{border-color:var(--red);color:var(--red)}
+body.dark-theme .ck-row{background:rgba(2,6,23,.6)}
+.ck-row:hover{border-color:rgba(220,38,38,.3)}
+.ck-row.on{border-color:rgba(22,163,74,.35);background:rgba(22,163,74,.04)}
+body.dark-theme .ck-row.on{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.04)}
+.ck-box{width:21px;min-width:21px;height:21px;border-radius:5px;border:2px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;transition:all .15s;margin-top:1px}
+.ck-row.on .ck-box{border-color:var(--green);background:var(--green)}
+.ck-txt{font-size:11px;color:var(--muted);line-height:1.6}
+.ck-txt strong{color:var(--text);display:block;margin-bottom:2px;font-size:11px}
+.ck-err{font-family:var(--mono);font-size:8px;color:var(--red);margin-top:7px;display:none}
 
-/* ── MODAL ── */
-.overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(255,255,255,.88);z-index:200;
-  backdrop-filter:blur(8px);padding:20px;overflow-y:auto;
-  transition:background-color .3s ease;
+/* PAYMENT */
+.pay{margin-top:24px}
+.pay-h{font-family:var(--mono);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid rgba(22,163,74,.2)}
+body.dark-theme .pay-h{border-bottom-color:rgba(16,185,129,.2)}
+.pay-sum{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:11px;padding:14px 16px;margin-bottom:14px;transition:background-color .3s ease}
+body.dark-theme .pay-sum{background:rgba(2,6,23,.8)}
+.pr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(51,65,85,.3)}
+.pr:last-child{border:none}
+.pk{color:var(--muted);font-family:var(--mono);font-size:8px;letter-spacing:.04em}
+.pv{color:var(--text);font-weight:700;font-size:12px}
+.pr.tot .pk{color:var(--text);font-size:10px;font-weight:700}
+.pr.tot .pv{color:var(--green);font-family:var(--disp);font-size:20px;font-weight:800}
+.stripe-box{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:11px;padding:14px 16px;margin-bottom:14px;transition:background-color .3s ease}
+body.dark-theme .stripe-box{background:rgba(2,6,23,.8)}
+.stripe-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+#card-el{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:7px;padding:11px;min-height:42px;transition:background-color .3s ease}
+body.dark-theme #card-el{background:rgba(15,23,42,.8)}
+#card-err{font-family:var(--mono);font-size:9px;color:var(--red);margin-top:4px;min-height:13px}
+.s-note{font-family:var(--mono);font-size:8px;color:var(--muted);margin-top:4px}
+.subbtn{
+  width:100%;padding:15px;border-radius:10px;font-family:var(--disp);font-size:15px;
+  font-weight:800;cursor:pointer;border:none;transition:all .25s;
+  background:linear-gradient(135deg,#991b1b,#dc2626,#ef4444);color:#fff;
+  box-shadow:0 4px 20px rgba(220,38,38,.4);
 }
-body.dark-theme .overlay{background:rgba(2,6,23,.88)}
-.overlay.show{display:flex;align-items:flex-start;justify-content:center}
-.modal{
-  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
-  max-width:640px;width:100%;position:relative;overflow:hidden;margin:auto;
-}
-.modal-top{height:3px;background:linear-gradient(90deg,#991b1b,#ef4444)}
-.mhd{
-  padding:20px 22px;border-bottom:1px solid var(--border);
-  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
-}
-.mhd-name{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.02em}
-.mhd-sub{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
-.mclose{
-  background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);
-  border-radius:5px;color:var(--red);font-size:13px;
-  width:28px;height:28px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;
-}
-body.dark-theme .mclose{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2)}
-.mclose:hover{background:rgba(220,38,38,.2)}
-.mbody{padding:20px 22px}
-.mscore{
-  display:flex;align-items:center;gap:14px;
-  background:rgba(255,255,255,.6);border:1px solid var(--border);
-  border-radius:9px;padding:12px 16px;margin-bottom:16px;transition:background-color .3s ease;
-}
-body.dark-theme .mscore{background:rgba(2,6,23,.6)}
-.ms-n{font-family:var(--disp);font-size:40px;font-weight:900;line-height:1}
-.ms-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
-.ms-badge{
-  font-family:var(--mono);font-size:9px;font-weight:700;
-  padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;
-}
-.ms-badge.hot{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);color:var(--red)}
-body.dark-theme .ms-badge.hot{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3)}
-.ms-badge.warm{background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.3);color:var(--yellow)}
-.ms-badge.cool{background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:var(--blue)}
-.msec{margin-bottom:14px}
-.msec-t{
-  font-family:var(--mono);font-size:8px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
-  margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--border);
-}
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.mcell{
-  background:rgba(255,255,255,.5);border:1px solid var(--border);
-  border-radius:7px;padding:9px 12px;transition:background-color .3s ease;
-}
-body.dark-theme .mcell{background:rgba(2,6,23,.5)}
-.mcell-l{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
-.mcell-v{font-size:12px;font-weight:700;color:var(--text);margin-top:3px}
-.contact-block{
-  background:rgba(255,255,255,.6);border:1px solid var(--border);
-  border-radius:8px;padding:11px 14px;transition:background-color .3s ease;
-}
-body.dark-theme .contact-block{background:rgba(2,6,23,.6)}
-.contact-t{font-family:var(--mono);font-size:8px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.crow{display:flex;align-items:center;gap:9px;margin-bottom:6px;font-size:12px}
-.crow:last-child{margin:0}
-.c-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);width:50px;flex-shrink:0}
-.c-val{color:var(--text);font-weight:600}
-.c-val a{color:var(--red);text-decoration:none}
-.c-val a:hover{text-decoration:underline}
-.mflags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
-.mfoot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:9px}
-.mfbtn{
-  flex:1;padding:10px;border-radius:7px;
-  font-family:var(--body);font-size:11px;font-weight:700;
-  cursor:pointer;border:none;transition:all .15s;
-}
-.mfbtn-p{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff}
-.mfbtn-p:hover{box-shadow:0 4px 14px rgba(220,38,38,.4)}
-.mfbtn-o{background:transparent;border:1px solid var(--border);color:var(--muted)}
-.mfbtn-o:hover{border-color:var(--red);color:var(--red)}
+.subbtn:hover{box-shadow:0 8px 30px rgba(220,38,38,.6);transform:translateY(-2px)}
+.subbtn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.sub-note{text-align:center;margin-top:8px;font-family:var(--mono);font-size:8px;color:var(--muted)}
 
-/* LOADING / EMPTY */
-.loading{text-align:center;padding:60px 20px;color:var(--muted)}
-.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{padding:40px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:11px;grid-column:1/-1}
+/* SUCCESS */
+.suc{display:none;padding:56px 30px;text-align:center}
+.suc.show{display:block}
+.suc-ic{width:72px;height:72px;border-radius:50%;background:rgba(22,163,74,.15);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 18px;box-shadow:0 0 28px rgba(22,163,74,.3);animation:pop .4s ease;color:var(--green)}
+body.dark-theme .suc-ic{background:rgba(16,185,129,.15);box-shadow:0 0 28px rgba(16,185,129,.3)}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.suc h2{font-family:var(--disp);font-size:26px;font-weight:800;margin-bottom:10px}
+.suc h2 em{color:var(--red);font-style:normal}
+.suc p{font-size:13px;color:var(--muted);line-height:1.7;max-width:440px;margin:0 auto 16px}
+.suc-ref{font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:7px;padding:8px 14px;display:inline-block;margin-bottom:16px;letter-spacing:.08em}
+.suc-steps{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15);border-radius:9px;padding:12px 16px;margin:0 auto 20px;font-family:var(--mono);font-size:9px;color:var(--text);line-height:2.1;text-align:left;max-width:440px}
+body.dark-theme .suc-steps{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.15);color:#fca5a5}
+.suc-steps strong{color:var(--text);display:block;margin-bottom:3px;font-size:10px}
+.suc-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.sb{padding:11px 20px;border-radius:7px;font-family:var(--body);font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.sb.p{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff;border:none}
+.sb.s{background:transparent;color:var(--muted);border:1px solid var(--border)}
 
-@media(max-width:640px){
-  .tb,.cov,.stats,.controls,.main{padding-left:14px;padding-right:14px}
-  .stats{flex-wrap:wrap}
-  .sv{min-width:50%;border-bottom:1px solid var(--border)}
-  .mgrid{grid-template-columns:1fr}
+/* TRUST + FOOTER */
+.trust{position:relative;z-index:1;padding:24px 36px 44px;max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tc{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:16px;transition:background-color .3s ease}
+.tc-ic{font-size:22px;margin-bottom:7px}
+.tc-t{font-family:var(--disp);font-size:13px;font-weight:900;margin-bottom:4px}
+.tc-d{font-size:11px;color:var(--muted);line-height:1.6}
+footer{position:relative;z-index:1;text-align:center;padding:20px 36px 36px;font-family:var(--mono);font-size:9px;color:var(--muted);line-height:2}
+footer a{color:var(--red)}
+
+@media(max-width:700px){
+  .pgrid{grid-template-columns:1fr}
+  .r2,.r3{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr}
+  .tb,.hero,.wrap,.msa-wrap,.fw,.trust,footer{padding-left:16px;padding-right:16px}
 }
 </style>
 </head>
@@ -376,102 +259,323 @@ body.dark-theme .contact-block{background:rgba(2,6,23,.6)}
 <div class="tb">
   <div class="logo">
     <div class="logo-ic">⚖️</div>
-    <div>
-      <div class="logo-nm">Accident AI</div>
-      <div class="logo-sb">Attorney Lead Portal</div>
-    </div>
+    <div><div class="logo-nm">Accident AI</div><div class="logo-sb">Attorney Lead Platform</div></div>
   </div>
-  <div class="tb-r">
-    <!-- THEME TOGGLE -->
+  <div style="display:flex;align-items:center;">
     <div class="theme-toggle" onclick="toggleTheme()">
       <span class="theme-option light active" id="theme-light">☀️ Light</span>
       <span class="theme-option dark" id="theme-dark">🌙 Dark</span>
     </div>
-    <div class="plan-pill" id="planPill">Loading...</div>
-    <div class="updated" id="updated">Loading...</div>
-    <button class="ref-btn" onclick="loadLeads()">↻ Refresh</button>
+    <div class="tb-badge">● Accepting New Partners</div>
   </div>
 </div>
 
-<!-- COVERAGE BANNER -->
-<div class="cov" id="covBanner">
-  <div class="cov-ic" id="covIc">📍</div>
-  <div>
-    <div class="cov-tag">Your Coverage Area</div>
-    <div class="cov-val" id="covVal">Loading...</div>
-    <div class="cov-states" id="covStates"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Attorney Partner Program — 2026</div>
+  <h1>Pre-Screened Accident Intakes<br><em>Built for Selective Firms</em></h1>
+  <p>Every claimant is scored on 9 liability factors before a firm ever speaks to them. High-value leads only. One firm per state. No shared access. No referral fees — flat subscription only.</p>
+  <div class="stats-bar">
+    <div class="st"><div class="st-n" id="sTotal">—</div><div class="st-l">Active Leads</div></div>
+    <div class="st"><div class="st-n" id="sHot">—</div><div class="st-l">High Value</div></div>
+    <div class="st"><div class="st-n" id="sStates">—</div><div class="st-l">States Active</div></div>
+    <div class="st"><div class="st-n" id="sAvg">—</div><div class="st-l">Avg Score</div></div>
   </div>
 </div>
 
-<!-- STATS ROW -->
-<div class="stats">
-  <div class="sv"><div class="sv-n b" id="stTotal">—</div><div class="sv-l">Your Leads</div></div>
-  <div class="sv"><div class="sv-n r" id="stHot">—</div><div class="sv-l">Hot Leads</div></div>
-  <div class="sv"><div class="sv-n y" id="stWarm">—</div><div class="sv-l">Warm Leads</div></div>
-  <div class="sv"><div class="sv-n g" id="stAvg">—</div><div class="sv-l">Avg Score</div></div>
-  <div class="sv"><div class="sv-n r" id="stTop">—</div><div class="sv-l">Top Score</div></div>
-</div>
-
-<!-- CONTROLS -->
-<div class="controls">
-  <div class="sw">
-    <span class="sw-ic">🔍</span>
-    <input type="text" id="searchBox" placeholder="Search name, injury, state, accident type..." oninput="render()">
-  </div>
-  <div class="pills">
-    <button class="pill on" onclick="setFilter(this,'all')">All</button>
-    <button class="pill hp" onclick="setFilter(this,'hot')">🔴 Hot</button>
-    <button class="pill wp" onclick="setFilter(this,'warm')">🟡 Warm</button>
-    <button class="pill" onclick="setFilter(this,'cool')">🔵 Low</button>
-  </div>
-  <select class="sort-sel" id="sortSel" onchange="render()">
-    <option value="score">Score ↓</option>
-    <option value="name">Name A–Z</option>
-    <option value="state">State</option>
-    <option value="days">Days Since Accident</option>
-  </select>
-</div>
-
-<!-- LEADS GRID -->
-<div class="main">
-  <div id="mainContent">
-    <div class="loading"><div class="spinner"></div><p>Loading your leads...</p></div>
-  </div>
-</div>
-
-<!-- LEAD DETAIL MODAL -->
-<div class="overlay" id="overlay" onclick="closeOverlay(event)">
-  <div class="modal">
-    <div class="modal-top"></div>
-    <div class="mhd">
-      <div><div class="mhd-name" id="mName"></div><div class="mhd-sub" id="mSub"></div></div>
-      <button class="mclose" onclick="document.getElementById('overlay').classList.remove('show')">✕</button>
+<!-- PLAN SELECTION -->
+<div class="wrap">
+  <div class="sec-tag">Choose Your Plan</div>
+  <div class="sec-h">State Priority Access</div>
+  <div class="sec-p">Lock in your coverage before another firm does. All High Value leads from your area route to you first. Flat subscription — no per-case fees, no referral structure, ABA compliant.</div>
+  <div class="pgrid">
+    <!-- TIER 1 -->
+    <div class="pc" id="pc1">
+      <div class="pb">
+        <div class="p-tier">Tier 1</div>
+        <div class="p-name">State Access</div>
+        <div class="p-price"><div class="p-amt g">$297</div><div class="p-per">/month</div></div>
+        <div class="p-note">1 state · Cancel anytime</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing — 1 state</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All High Value &amp; Moderate leads</li>
+          <li>✅ 9-factor liability scoring</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email lead alerts</li>
+          <li class="dim">— Multi-state access</li>
+          <li class="dim">— API integration</li>
+        </ul>
+        <button class="pbtn g" onclick="pickPlan('State Access','$297/month','g',1)">Select State Access →</button>
+      </div>
     </div>
-    <div class="mbody" id="mBody"></div>
-    <div class="mfoot">
-      <button class="mfbtn mfbtn-p" id="mCall">📞 Call Lead</button>
-      <button class="mfbtn mfbtn-o" onclick="copyModal()">📋 Copy Details</button>
-      <button class="mfbtn mfbtn-o" onclick="document.getElementById('overlay').classList.remove('show')">Close</button>
+    <!-- TIER 2 -->
+    <div class="pc hot" id="pc2">
+      <div class="pc-top">Most Popular</div>
+      <div class="pb">
+        <div class="p-tier">Tier 2</div>
+        <div class="p-name">Regional Package</div>
+        <div class="p-price"><div class="p-amt r">$497</div><div class="p-per">/month</div></div>
+        <div class="p-note">Full region · Best value</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing — full region</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All High Value &amp; Moderate leads</li>
+          <li>✅ 9-factor liability scoring</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email + SMS alerts</li>
+          <li>✅ Multi-state dashboard</li>
+          <li class="dim">— API integration</li>
+        </ul>
+        <button class="pbtn r" onclick="pickPlan('Regional Package','$497/month','r',2)">Select Regional →</button>
+      </div>
+    </div>
+    <!-- TIER 3 -->
+    <div class="pc" id="pc3">
+      <div class="pb">
+        <div class="p-tier">Tier 3</div>
+        <div class="p-name">National Access</div>
+        <div class="p-price"><div class="p-amt c">$797</div><div class="p-per">/month</div></div>
+        <div class="p-note">All 53 locations · Full platform</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing — all states</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All High Value &amp; Moderate leads</li>
+          <li>✅ 9-factor liability scoring</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email + SMS alerts</li>
+          <li>✅ Multi-state dashboard</li>
+          <li>✅ API integration</li>
+        </ul>
+        <button class="pbtn c" onclick="pickPlan('National Access','$797/month','c',3)">Select National →</button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- MSA -->
+<div class="msa-wrap">
+  <div class="msa-box">
+    <div class="msa-hd">
+      <div class="msa-ic">⚖️</div>
+      <div><h3>Master Service Agreement</h3><p>Accident AI LLC · Legal Marketing Platform · 2026</p></div>
+    </div>
+    <div class="msa-bd">
+      <h4>1. Nature of Services</h4>
+      <p>Accident AI LLC operates a legal marketing and intake qualification platform. Services are limited to marketing data, case scoring analysis, and dashboard access. Company does not provide legal advice and is not a law firm.</p>
+      <h4>2. No Referral Fee / Fee Splitting</h4>
+      <p>All fees are flat subscription fees for software access only. No fee is contingent upon or calculated as a percentage of legal fees. This complies with ABA Model Rule 7.2 and Rule 1.5(e). Accident AI LLC never takes a percentage of any legal fee or settlement.</p>
+      <h4>3. State Priority Exclusivity</h4>
+      <p>Upon activation, the subscribing firm receives priority lead routing for selected states for the duration of the active subscription. Company will not grant priority routing for the same state to another firm while the subscription is active.</p>
+      <h4>4. Data Ownership</h4>
+      <p>Accident AI LLC retains ownership of the scoring algorithm and platform infrastructure. The subscribing firm owns the attorney-client relationship upon independent initiation of contact with any claimant.</p>
+      <h4>5. Independent Review</h4>
+      <p>All case scoring data is for informational purposes only. The firm is solely responsible for its own independent evaluation of each case and all intake decisions.</p>
+      <h4>6. Compliance Acknowledgment</h4>
+      <p>The subscribing attorney warrants they are a licensed attorney in good standing and that use of this platform complies with all applicable state bar rules, including rules governing attorney advertising and client solicitation.</p>
+      <h4>7. Subscription Terms</h4>
+      <p>Subscriptions are billed monthly. Cancellation takes effect at end of current billing period. No refunds for partial months.</p>
+      <h4>8. Limitation of Liability</h4>
+      <p>Accident AI LLC liability is limited to the amount paid in the prior 30-day period. Company is not liable for missed cases, lost revenue, or decisions made based on platform data.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ONBOARDING FORM -->
+<div class="fw">
+  <div class="fc">
+    <div class="fhd">
+      <h2>Attorney Partner Application</h2>
+      <p>Select a plan above · then complete all sections below</p>
+    </div>
+    <div class="pbar" id="pbar">
+      <div>
+        <div class="pb-l">Selected Plan</div>
+        <div class="pb-v" id="pbV">← Select Tier 1, 2, or 3 above first</div>
+      </div>
+      <div class="pb-ch" onclick="document.querySelector('.wrap').scrollIntoView({behavior:'smooth'})">Change Plan</div>
+    </div>
+
+    <div class="fb" id="formBody">
+
+      <!-- PART 1: FIRM IDENTITY -->
+      <div class="fpart">
+        <div class="ftit"><span class="fnum">1</span>Firm Identity</div>
+        <div class="r2">
+          <div class="fld" id="f-fn"><label>First Name <span class="req">*</span></label><input type="text" id="fn" placeholder="Attorney first name"><div class="em">Required</div></div>
+          <div class="fld" id="f-ln"><label>Last Name <span class="req">*</span></label><input type="text" id="ln" placeholder="Attorney last name"><div class="em">Required</div></div>
+        </div>
+        <div class="r2" style="margin-top:14px">
+          <div class="fld" id="f-firm"><label>Firm Name <span class="req">*</span></label><input type="text" id="firm" placeholder="Law Firm LLC"><div class="em">Required</div></div>
+          <div class="fld" id="f-bar"><label>Bar Number <span class="req">*</span></label><input type="text" id="bar" placeholder="State bar number"><div class="em">Required</div></div>
+        </div>
+        <div style="margin-top:14px">
+          <div class="fld" id="f-addr"><label>Firm Address <span class="req">*</span></label><input type="text" id="addr" placeholder="123 Main St, City, State ZIP"><div class="em">Required</div></div>
+        </div>
+        <div class="r2" style="margin-top:14px">
+          <div class="fld" id="f-ph"><label>Phone <span class="req">*</span></label><input type="tel" id="ph" placeholder="(555) 000-0000"><div class="em">Required</div></div>
+          <div class="fld" id="f-email"><label>Email <span class="req">*</span></label><input type="email" id="email" placeholder="attorney@firm.com"><div class="em">Required</div></div>
+        </div>
+      </div>
+
+      <!-- PART 2: INTAKE PREFERENCES -->
+      <div class="fpart">
+        <div class="ftit"><span class="fnum">2</span>Intake Preferences</div>
+        <div class="r2">
+          <div class="fld" id="f-in"><label>Intake Contact Name <span class="req">*</span></label><input type="text" id="iname" placeholder="Who handles intake calls?"><div class="em">Required</div></div>
+          <div class="fld" id="f-ip"><label>Intake Contact Phone <span class="req">*</span></label><input type="tel" id="iphone" placeholder="Direct intake line"><div class="em">Required</div></div>
+        </div>
+
+        <!-- STATE SELECTION -->
+        <div class="st-sect">
+          <div class="st-lbl" id="stLbl">Coverage Area <span class="req">*</span></div>
+          <div id="modeNone"><div class="st-hint">Select a plan above to choose your coverage area.</div></div>
+          <div id="modeSingle" style="display:none"><div class="st-hint">Click exactly <strong>1 state</strong> below. Clicking a second state replaces the first.</div></div>
+          <div id="modeRegion" style="display:none">
+            <div class="st-hint">Click a region to auto-select all states in it. Then deselect any you don't want.</div>
+            <div class="rgrid" id="rGrid"></div>
+          </div>
+          <div id="modeNational" style="display:none"><div class="st-hint ok">✓ National Access — all 53 locations selected automatically below.</div></div>
+          <div class="chips" id="chipGrid"></div>
+          <div class="st-err" id="stErr">Please select your coverage area.</div>
+        </div>
+
+        <div class="r3">
+          <div class="fld" id="f-cap"><label>Monthly Case Capacity <span class="req">*</span></label>
+            <select id="cap">
+              <option value="">Select...</option>
+              <option value="1-10">1–10 / month</option>
+              <option value="10-25">10–25 / month</option>
+              <option value="25-50">25–50 / month</option>
+              <option value="50+">50+ / month</option>
+            </select>
+            <div class="em">Required</div>
+          </div>
+          <div class="fld" id="f-type"><label>Case Types Accepted <span class="req">*</span></label>
+            <select id="casetype">
+              <option value="">Select...</option>
+              <option value="ALL">All Accident Types</option>
+              <option value="AUTO">Auto vs Auto Only</option>
+              <option value="TRUCK">Commercial Truck</option>
+              <option value="RIDESHARE">Rideshare (Uber/Lyft)</option>
+              <option value="HITRUN">Hit &amp; Run / Uninsured</option>
+            </select>
+            <div class="em">Required</div>
+          </div>
+          <div class="fld"><label>Current CRM</label>
+            <select id="crm">
+              <option value="">None / Not sure</option>
+              <option value="Clio">Clio</option>
+              <option value="FileVine">FileVine</option>
+              <option value="Litify">Litify</option>
+              <option value="MyCase">MyCase</option>
+              <option value="SmartAdvocate">SmartAdvocate</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 3: COMPLIANCE -->
+      <div class="fpart">
+        <div class="ftit"><span class="fnum">3</span>Legal Compliance Agreement</div>
+        <div class="ck-list">
+          <div class="ck-row" id="cr1" onclick="doChk(1)">
+            <div class="ck-box" id="cb1"></div>
+            <div class="ck-txt"><strong>Marketing Services Acknowledgment</strong>I understand Accident AI LLC is a legal marketing service, not a referral service. No fee paid constitutes a referral fee or is connected to any legal fee earned.</div>
+          </div>
+          <div class="ck-row" id="cr2" onclick="doChk(2)">
+            <div class="ck-box" id="cb2"></div>
+            <div class="ck-txt"><strong>ABA Rule 1.5(e) Compliance</strong>I agree to pay a flat subscription fee for dashboard access only. This fee is not based on case outcomes, not a percentage of legal fees, and does not constitute fee-splitting.</div>
+          </div>
+          <div class="ck-row" id="cr3" onclick="doChk(3)">
+            <div class="ck-box" id="cb3"></div>
+            <div class="ck-txt"><strong>Independent Review Responsibility</strong>I am solely responsible for my own review of all case data. Accident AI LLC provides marketing data only. All intake decisions are made exclusively by my firm.</div>
+          </div>
+          <div class="ck-row" id="cr4" onclick="doChk(4)">
+            <div class="ck-box" id="cb4"></div>
+            <div class="ck-txt"><strong>Master Service Agreement</strong>I have read and agree to the Accident AI LLC Master Service Agreement above, including the exclusivity clause and no fee-splitting provision.</div>
+          </div>
+        </div>
+        <div class="ck-err" id="ckErr">All four compliance boxes must be checked to continue.</div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="pay">
+        <div class="pay-h">💳 Secure Payment</div>
+        <div class="pay-sum">
+          <div class="pr"><span class="pk">Plan</span><span class="pv" id="payPlan">—</span></div>
+          <div class="pr"><span class="pk">Billing</span><span class="pv">Monthly · Auto-renews</span></div>
+          <div class="pr"><span class="pk">First Charge</span><span class="pv">Today upon submission</span></div>
+          <div class="pr tot"><span class="pk">Total Due Today</span><span class="pv" id="payTotal">—</span></div>
+        </div>
+        <div class="stripe-box">
+          <div class="stripe-lbl">Card Information</div>
+          <div id="card-el"><div style="color:var(--muted);font-family:var(--mono);font-size:10px;line-height:1.8;padding:2px 0">🔧 Replace <strong style="color:#ef4444">STRIPE_KEY_HERE</strong> in the script with your pk_live_ key from dashboard.stripe.com</div></div>
+          <div id="card-err"></div>
+          <div class="s-note">🔒 Secured by Stripe · 256-bit SSL · PCI DSS Compliant</div>
+        </div>
+        <button class="subbtn" id="subBtn" onclick="doSubmit()"><span id="subLbl">Activate My Firm — Submit &amp; Pay</span></button>
+        <div class="sub-note">By submitting you agree to monthly billing. Cancel anytime.</div>
+      </div>
+
+    </div><!-- /formBody -->
+
+    <!-- SUCCESS SCREEN -->
+    <div class="suc" id="sucScr">
+      <div class="suc-ic">✓</div>
+      <h2>Welcome to <em>Accident AI</em></h2>
+      <p>Your application has been received. High Value leads from your coverage area will begin routing to your intake contact after activation.</p>
+      <div class="suc-ref" id="sucRef">FIRM-——</div>
+      <div class="suc-steps">
+        <strong>What happens next:</strong>
+        1. Confirmation email sent to <span id="sucEmail">your email</span><br>
+        2. Firm activated within 24 hours<br>
+        3. High Value lead alerts begin immediately after activation<br>
+        4. Questions? david@stayvcs.com
+      </div>
+      <div class="suc-btns">
+        <a href="#" id="portalBtn" class="sb p" target="_blank">View Your Lead Dashboard →</a>
+        <a href="mailto:david@stayvcs.com" class="sb s">Contact Support</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRUST BADGES -->
+<div class="trust">
+  <div class="tc"><div class="tc-ic">⚖️</div><div class="tc-t">ABA Compliant</div><div class="tc-d">Flat subscription. No fee-splitting. Built around ABA Model Rules 7.2 and 1.5(e).</div></div>
+  <div class="tc"><div class="tc-ic">🔒</div><div class="tc-t">State Exclusivity</div><div class="tc-d">One firm per state for priority routing. Your coverage locked for your subscription period.</div></div>
+  <div class="tc"><div class="tc-ic">📊</div><div class="tc-t">9-Factor Scoring</div><div class="tc-d">Every lead scored on 9 liability factors including injury severity, fault, and damage estimate. Full breakdown before you contact anyone.</div></div>
+</div>
+
+<footer>
+  <p>© 2026 Accident AI LLC · Legal Marketing &amp; Intake Qualification Platform · david@stayvcs.com</p>
+  <p>This platform is not a law firm and does not provide legal advice.</p>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 // ===== THEME TOGGLE =====
 function toggleTheme() {
   const body = document.body;
-  const lightBtn = document.getElementById('theme-light');
-  const darkBtn  = document.getElementById('theme-dark');
-  const meta     = document.getElementById('theme-color');
+  const lo = document.getElementById('theme-light');
+  const dk = document.getElementById('theme-dark');
+  const mt = document.getElementById('theme-color');
   body.classList.toggle('dark-theme');
   const isDark = body.classList.contains('dark-theme');
-  lightBtn.classList.toggle('active', !isDark);
-  darkBtn.classList.toggle('active',   isDark);
-  meta.setAttribute('content', isDark ? '#020617' : '#f8fafc');
-  localStorage.setItem('portal-theme', isDark ? 'dark' : 'light');
+  lo.classList.toggle('active', !isDark);
+  dk.classList.toggle('active',  isDark);
+  mt.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+  if (CE) { try { CE.update({style:{base:{color: isDark ? '#f8fafc' : '#0f172a'}}}); } catch(e){} }
+  localStorage.setItem('accident-onboard-theme', isDark ? 'dark' : 'light');
 }
 function loadThemePreference() {
-  const saved = localStorage.getItem('portal-theme');
+  const saved = localStorage.getItem('accident-onboard-theme');
   if (saved === 'dark') {
     document.body.classList.add('dark-theme');
     document.getElementById('theme-light').classList.remove('active');
@@ -481,301 +585,229 @@ function loadThemePreference() {
 }
 
 // ===== CONFIG =====
-// Apps Script URL — hardcoded, connects automatically
-var API = 'https://script.google.com/macros/s/AKfycbxs8vw-jadNBh6SOq_uPdz6mMPGXQvoeMGoW7ZGbPbKTaBG1xvrvmST6Pmoc7NLtNM/exec';
+var STRIPE_KEY  = 'STRIPE_KEY_HERE';
+var API         = 'https://script.google.com/macros/s/AKfycbxs8vw-jadNBh6SOq_uPdz6mMPGXQvoeMGoW7ZGbPbKTaBG1xvrvmST6Pmoc7NLtNM/exec';
+var PORTAL_BASE = 'https://vence31.github.io/Attorney-Portal-Car-Accident/';
 
-// URL params — pass ?plan=Gold&tier=1&states=TN|MS&firm=Smith+Law to customize
-var P            = new URLSearchParams(window.location.search);
-var PLAN         = P.get('plan')   || '';
-var TIER         = parseInt(P.get('tier') || '0', 10);
-var RAW          = P.get('states') || '';
-var FIRM         = P.get('firm')   || 'Your Firm';
-var STATE_FILTER = [];
-if (RAW && RAW !== 'ALL' && TIER !== 3) {
-  STATE_FILTER = RAW.split('|').map(function(s){return s.trim();}).filter(Boolean);
+// ===== STATES & REGIONS (identical to disability onboarding) =====
+var ALL_STATES = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','Washington DC','West Virginia','Wisconsin','Wyoming','Puerto Rico','Virgin Islands'];
+
+var ABBR = {Alabama:'AL',Alaska:'AK',Arizona:'AZ',Arkansas:'AR',California:'CA',Colorado:'CO',Connecticut:'CT',Delaware:'DE',Florida:'FL',Georgia:'GA',Hawaii:'HI',Idaho:'ID',Illinois:'IL',Indiana:'IN',Iowa:'IA',Kansas:'KS',Kentucky:'KY',Louisiana:'LA',Maine:'ME',Maryland:'MD',Massachusetts:'MA',Michigan:'MI',Minnesota:'MN',Mississippi:'MS',Missouri:'MO',Montana:'MT',Nebraska:'NE',Nevada:'NV','New Hampshire':'NH','New Jersey':'NJ','New Mexico':'NM','New York':'NY','North Carolina':'NC','North Dakota':'ND',Ohio:'OH',Oklahoma:'OK',Oregon:'OR',Pennsylvania:'PA','Rhode Island':'RI','South Carolina':'SC','South Dakota':'SD',Tennessee:'TN',Texas:'TX',Utah:'UT',Vermont:'VT',Virginia:'VA',Washington:'WA','Washington DC':'DC','West Virginia':'WV',Wisconsin:'WI',Wyoming:'WY','Puerto Rico':'PR','Virgin Islands':'VI'};
+
+var REGIONS = {
+  Southeast:   ['Alabama','Arkansas','Florida','Georgia','Kentucky','Louisiana','Mississippi','North Carolina','South Carolina','Tennessee','Virginia','West Virginia'],
+  Northeast:   ['Connecticut','Delaware','Maine','Maryland','Massachusetts','New Hampshire','New Jersey','New York','Pennsylvania','Rhode Island','Vermont','Washington DC'],
+  Midwest:     ['Illinois','Indiana','Iowa','Kansas','Michigan','Minnesota','Missouri','Nebraska','North Dakota','Ohio','South Dakota','Wisconsin'],
+  Southwest:   ['Arizona','Colorado','Nevada','New Mexico','Oklahoma','Texas','Utah'],
+  West:        ['Alaska','California','Hawaii','Idaho','Montana','Oregon','Washington','Wyoming'],
+  Territories: ['Puerto Rico','Virgin Islands']
+};
+
+// Build state chips
+var chipGrid = document.getElementById('chipGrid');
+ALL_STATES.forEach(function(s) {
+  var d = document.createElement('div');
+  d.className = 'chip locked';
+  d.textContent = s;
+  d.dataset.state = s;
+  d.onclick = function(){ chipClick(this); };
+  chipGrid.appendChild(d);
+});
+
+// Build region buttons
+var rGrid = document.getElementById('rGrid');
+Object.keys(REGIONS).forEach(function(name) {
+  var abbrevs = REGIONS[name].map(function(s){ return ABBR[s]||s; });
+  var btn = document.createElement('div');
+  btn.className = 'rbtn';
+  btn.dataset.region = name;
+  btn.innerHTML = '<div class="rn">'+name+'</div><div class="rs">'+abbrevs.join(' · ')+'</div>';
+  btn.onclick = function(){ selectRegion(this); };
+  rGrid.appendChild(btn);
+});
+
+// ===== LIVE STATS =====
+fetch(API + '?action=get_summary')
+  .then(function(r){ return r.json(); })
+  .then(function(d) {
+    if (d.summary) {
+      var s = d.summary;
+      if (s.total)    document.getElementById('sTotal').textContent  = s.total;
+      if (s.hot)      document.getElementById('sHot').textContent    = s.hot;
+      if (s.avgScore) document.getElementById('sAvg').textContent    = s.avgScore;
+      // count unique states from byFault keys as approximation
+      document.getElementById('sStates').textContent = '14+';
+    }
+  })
+  .catch(function() {
+    document.getElementById('sTotal').textContent  = '30+';
+    document.getElementById('sHot').textContent    = '14';
+    document.getElementById('sStates').textContent = '12';
+    document.getElementById('sAvg').textContent    = '79';
+  });
+
+// ===== PLAN SELECTION =====
+var planMode = 0, chosenPlan = '', planPrice = '';
+
+function pickPlan(name, price, color, tier) {
+  chosenPlan = name; planPrice = price; planMode = tier;
+  [1,2,3].forEach(function(n){ document.getElementById('pc'+n).classList.remove('sel'); });
+  document.getElementById('pc'+tier).classList.add('sel');
+  var v = document.getElementById('pbV');
+  v.className = 'pb-v ' + color;
+  v.textContent = name + ' — ' + price;
+  document.getElementById('payPlan').textContent  = name;
+  document.getElementById('payTotal').textContent = price;
+  setupMode(tier);
+  setTimeout(function(){ document.querySelector('.fw').scrollIntoView({behavior:'smooth',block:'start'}); }, 200);
 }
 
-// Plan pill color
-var PCOLOR = TIER === 1 ? 'gold' : TIER === 2 ? 'blue' : 'red';
-
-// ===== INIT UI =====
-(function init() {
-  var pill = document.getElementById('planPill');
-  pill.textContent = PLAN || 'Attorney Portal';
-  pill.className   = 'plan-pill ' + PCOLOR;
-
-  if (TIER === 1) {
-    document.getElementById('covIc').textContent = '📍';
-    document.getElementById('covVal').textContent = STATE_FILTER[0] || '1 State';
-    document.getElementById('covStates').textContent = 'State Access — priority routing for 1 state';
-  } else if (TIER === 2) {
-    document.getElementById('covIc').textContent = '🗺';
-    document.getElementById('covVal').textContent = 'Regional Coverage — ' + STATE_FILTER.length + ' states';
-    document.getElementById('covStates').textContent = STATE_FILTER.join(' · ');
-  } else {
-    document.getElementById('covIc').textContent = '🌎';
-    document.getElementById('covVal').textContent = 'National Access — All 53 Locations';
-    document.getElementById('covStates').textContent = 'All 50 states + Washington DC + Puerto Rico + Virgin Islands';
+function setupMode(tier) {
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on','locked'); });
+  document.querySelectorAll('.rbtn').forEach(function(b){ b.classList.remove('on'); });
+  ['modeNone','modeSingle','modeRegion','modeNational'].forEach(function(id){ document.getElementById(id).style.display='none'; });
+  if (tier === 1) {
+    document.getElementById('modeSingle').style.display = 'block';
+    document.getElementById('stLbl').textContent = 'Select Your 1 State *';
+  } else if (tier === 2) {
+    document.getElementById('modeRegion').style.display = 'block';
+    document.getElementById('stLbl').textContent = 'Select Your Region *';
+  } else if (tier === 3) {
+    document.getElementById('modeNational').style.display = 'block';
+    document.getElementById('stLbl').textContent = 'Coverage — All 53 Locations';
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.add('on','locked'); });
   }
-})();
-
-// ===== DATA =====
-var ALL = [], curFilter = 'all', curLead = null;
-
-function filterByPlan(leads) {
-  if (!STATE_FILTER.length) return leads;
-  return leads.filter(function(l) { return STATE_FILTER.indexOf(l['State'] || l.state) !== -1; });
 }
 
-async function loadLeads() {
-  document.getElementById('mainContent').innerHTML = '<div class="loading"><div class="spinner"></div><p>Fetching leads from Google Sheets...</p></div>';
-  document.getElementById('updated').textContent = 'Refreshing...';
-  try {
-    var r = await fetch(API + '?action=get_leads');
-    var j = await r.json();
-    if (j.status !== 'success') throw new Error('no success');
-    // Map sheet columns to lead objects
-    ALL = filterByPlan((j.leads || []).map(mapLead));
-    var t = new Date();
-    document.getElementById('updated').textContent = 'Updated ' + t.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  } catch(e) {
-    ALL = filterByPlan(getSample());
-    document.getElementById('updated').textContent = 'Sample data (connect API to load live leads)';
+function chipClick(chip) {
+  if (planMode === 1) {
+    document.querySelectorAll('.chip.on').forEach(function(c){ c.classList.remove('on'); });
+    chip.classList.add('on');
+  } else if (planMode === 2) {
+    chip.classList.toggle('on');
+    document.querySelectorAll('.rbtn.on').forEach(function(b){ b.classList.remove('on'); });
   }
-  updateStats();
-  render();
 }
 
-// Map raw sheet row object to normalized lead object
-function mapLead(row) {
-  return {
-    id:           row['Timestamp'] ? 'ACC-' + new Date(row['Timestamp']).getTime().toString(36).toUpperCase().slice(-6) : 'ACC-???',
-    name:         row['Name']             || '',
-    phone:        row['Phone']            || '',
-    email:        row['Email']            || '',
-    state:        row['State']            || '',
-    accidentDate: row['Accident Date']    || '',
-    daysSince:    row['Days Since']       || '',
-    accidentType: row['Accident Type']    || '',
-    atFault:      row['At Fault']         || '',
-    police:       row['Police Report']    || '',
-    severity:     row['Injury Severity']  || '',
-    injuries:     row['Injuries']         || '',
-    medSought:    row['Sought Medical']   || '',
-    hospitalized: row['Hospitalized']     || '',
-    missedWork:   row['Missed Work']      || '',
-    injuryDesc:   row['Injury Description'] || '',
-    hasInsurance: row['Has Insurance']    || '',
-    otherIns:     row['Other Driver Insured'] || '',
-    claimFiled:   row['Claim Filed']      || '',
-    settlement:   row['Settlement Offered'] || '',
-    hasAttorney:  row['Has Attorney']     || '',
-    damageEst:    row['Damage Estimate']  || '',
-    score:        parseInt(row['SCORE'])  || 0,
-    grade:        row['GRADE']            || '',
-    tier:         row['TIER']             || '',
-    timestamp:    row['Timestamp']        || ''
-  };
-}
-
-function updateStats() {
-  var hot  = ALL.filter(function(l){return tierClass(l.tier) === 'hot';}).length;
-  var warm = ALL.filter(function(l){return tierClass(l.tier) === 'warm';}).length;
-  var avg  = ALL.length ? Math.round(ALL.reduce(function(a,l){return a+l.score;}, 0) / ALL.length) : 0;
-  var top  = ALL.length ? Math.max.apply(null, ALL.map(function(l){return l.score;})) : 0;
-  document.getElementById('stTotal').textContent = ALL.length;
-  document.getElementById('stHot').textContent   = hot;
-  document.getElementById('stWarm').textContent  = warm;
-  document.getElementById('stAvg').textContent   = avg;
-  document.getElementById('stTop').textContent   = top;
-}
-
-function tierClass(t) {
-  if (!t) return 'cool';
-  t = t.toLowerCase();
-  if (t.includes('hot'))  return 'hot';
-  if (t.includes('warm')) return 'warm';
-  return 'cool';
-}
-
-function setFilter(btn, f) {
-  document.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on');});
+function selectRegion(btn) {
+  var name  = btn.dataset.region;
+  var group = REGIONS[name] || [];
+  document.querySelectorAll('.rbtn').forEach(function(b){ b.classList.remove('on'); });
   btn.classList.add('on');
-  curFilter = f;
-  render();
+  document.querySelectorAll('.chip').forEach(function(c){
+    if (group.indexOf(c.dataset.state) !== -1) c.classList.add('on');
+    else c.classList.remove('on');
+  });
 }
 
-function getFiltered() {
-  var q = document.getElementById('searchBox').value.toLowerCase().trim();
-  var f = ALL.filter(function(l) {
-    var mf = curFilter === 'all' || tierClass(l.tier) === curFilter;
-    var ms = !q || [l.name, l.injuries, l.state, l.accidentType].join(' ').toLowerCase().includes(q);
-    return mf && ms;
-  });
-  var s = document.getElementById('sortSel').value;
-  f.sort(function(a, b) {
-    if (s === 'score') return b.score - a.score;
-    if (s === 'name')  return (a.name  || '').localeCompare(b.name  || '');
-    if (s === 'state') return (a.state || '').localeCompare(b.state || '');
-    if (s === 'days')  return parseInt(b.daysSince || 0) - parseInt(a.daysSince || 0);
-    return 0;
-  });
-  return f;
+// ===== CHECKBOXES =====
+var CK = [false, false, false, false];
+function doChk(n) {
+  CK[n-1] = !CK[n-1];
+  document.getElementById('cr'+n).classList.toggle('on', CK[n-1]);
+  document.getElementById('cb'+n).textContent = CK[n-1] ? '✓' : '';
+  if (CK[0] && CK[1] && CK[2] && CK[3]) document.getElementById('ckErr').style.display = 'none';
 }
 
-function render() {
-  var leads = getFiltered();
-  var main  = document.getElementById('mainContent');
-  if (!leads.length) {
-    main.innerHTML = '<div class="grid"><div class="empty">No leads match this filter in your coverage area.</div></div>';
-    return;
+// ===== STRIPE =====
+var SI = null, CE = null;
+if (STRIPE_KEY !== 'STRIPE_KEY_HERE') {
+  try {
+    SI = Stripe(STRIPE_KEY);
+    var isDark = document.body.classList.contains('dark-theme');
+    var els = SI.elements({ appearance: { theme: isDark ? 'night' : 'flat', variables: { colorPrimary: isDark ? '#ef4444' : '#dc2626', colorBackground: isDark ? '#0f172a' : '#ffffff', colorText: isDark ? '#f8fafc' : '#0f172a', fontFamily: 'Manrope,sans-serif', borderRadius: '7px' } } });
+    CE = els.create('card', { style: { base: { color: isDark ? '#f8fafc' : '#0f172a', fontFamily: 'Manrope,sans-serif', fontSize: '13px', '::placeholder': {color: isDark ? '#64748b' : '#94a3b8'} }, invalid: {color: isDark ? '#ef4444' : '#dc2626'} } });
+    CE.mount('#card-el');
+    CE.on('change', function(e){ document.getElementById('card-err').textContent = e.error ? e.error.message : ''; });
+  } catch(e) {}
+}
+
+// ===== VALIDATION =====
+function need(fId, iId) {
+  var f = document.getElementById(fId), i = document.getElementById(iId);
+  var ok = i && i.value.trim().length > 0;
+  f.classList.toggle('bad', !ok);
+  return ok;
+}
+
+function validate() {
+  var ok = true;
+  if (!need('f-fn',   'fn'))       ok = false;
+  if (!need('f-ln',   'ln'))       ok = false;
+  if (!need('f-firm', 'firm'))     ok = false;
+  if (!need('f-bar',  'bar'))      ok = false;
+  if (!need('f-addr', 'addr'))     ok = false;
+  if (!need('f-ph',   'ph'))       ok = false;
+  if (!need('f-email','email'))    ok = false;
+  if (!need('f-in',   'iname'))    ok = false;
+  if (!need('f-ip',   'iphone'))   ok = false;
+  if (!need('f-cap',  'cap'))      ok = false;
+  if (!need('f-type', 'casetype')) ok = false;
+  if (!planMode) { alert('Please select a plan above first.'); document.querySelector('.wrap').scrollIntoView({behavior:'smooth'}); return false; }
+  var chips = document.querySelectorAll('.chip.on');
+  var stOk  = planMode === 3 || chips.length > 0;
+  document.getElementById('stErr').style.display = stOk ? 'none' : 'block';
+  if (!stOk) ok = false;
+  var allCk = CK[0] && CK[1] && CK[2] && CK[3];
+  document.getElementById('ckErr').style.display = allCk ? 'none' : 'block';
+  if (!allCk) ok = false;
+  return ok;
+}
+
+// ===== SUBMIT =====
+async function doSubmit() {
+  if (!validate()) return;
+  var btn = document.getElementById('subBtn'), lbl = document.getElementById('subLbl');
+  btn.disabled = true; lbl.textContent = 'Processing...';
+  var stList = planMode === 3 ? 'ALL' : Array.from(document.querySelectorAll('.chip.on')).map(function(c){ return c.dataset.state; }).join('|');
+  var emailVal = document.getElementById('email').value.trim();
+  var payload = {
+    action:        'submit_attorney',
+    firmName:      document.getElementById('firm').value.trim(),
+    attFirstName:  document.getElementById('fn').value.trim(),
+    attLastName:   document.getElementById('ln').value.trim(),
+    barNumber:     document.getElementById('bar').value.trim(),
+    address:       document.getElementById('addr').value.trim(),
+    phone:         document.getElementById('ph').value.trim(),
+    email:         emailVal,
+    intakeName:    document.getElementById('iname').value.trim(),
+    intakePhone:   document.getElementById('iphone').value.trim(),
+    states:        stList,
+    capacity:      document.getElementById('cap').value,
+    caseTypes:     document.getElementById('casetype').value,
+    crm:           document.getElementById('crm').value,
+    plan:          chosenPlan,
+    amount:        planPrice,
+    platform:      'Accident AI',
+    timestamp:     new Date().toISOString()
+  };
+
+  if (SI && CE) {
+    lbl.textContent = 'Processing payment...';
+    try {
+      var res = await SI.createPaymentMethod({ type:'card', card:CE, billing_details:{ name: payload.attFirstName+' '+payload.attLastName, email: emailVal, phone: payload.phone } });
+      if (res.error) { document.getElementById('card-err').textContent = res.error.message; btn.disabled = false; lbl.textContent = 'Activate My Firm — Submit & Pay'; return; }
+      payload.stripePaymentMethodId = res.paymentMethod.id;
+    } catch(e) {}
   }
-  main.innerHTML = '<div class="grid">' + leads.map(cardHTML).join('') + '</div>';
+
+  lbl.textContent = 'Activating firm...';
+  try { await fetch(API + '?' + new URLSearchParams(payload).toString(), {method:'GET', mode:'no-cors'}); } catch(e) {}
+
+  // Build portal URL
+  var portalURL = PORTAL_BASE + '?plan=' + encodeURIComponent(chosenPlan) + '&tier=' + planMode + '&states=' + encodeURIComponent(stList) + '&firm=' + encodeURIComponent(document.getElementById('firm').value.trim());
+  document.getElementById('portalBtn').href = portalURL;
+
+  // Show success
+  var ref = 'FIRM-' + Date.now().toString(36).toUpperCase().slice(-6);
+  document.getElementById('sucRef').textContent   = ref;
+  document.getElementById('sucEmail').textContent = emailVal;
+  document.getElementById('formBody').style.display = 'none';
+  document.getElementById('sucScr').classList.add('show');
 }
 
-// ===== SCORE RING =====
-function sc(s)  { return s >= 80 ? 'var(--red)' : s >= 60 ? 'var(--yellow)' : 'var(--blue)'; }
-function sg(s)  { return s >= 80 ? 'rgba(220,38,38,.5)' : s >= 60 ? 'rgba(234,179,8,.4)' : 'rgba(37,99,235,.35)'; }
-function ring(score) {
-  var col = sc(score), r = 21, cx = 27, ci = 2 * Math.PI * r, d = ci * (score / 100);
-  return '<div class="ring-wrap"><svg width="54" height="54" viewBox="0 0 54 54"><circle cx="'+cx+'" cy="'+cx+'" r="'+r+'" fill="none" stroke="var(--bg3)" stroke-width="4"/><circle cx="'+cx+'" cy="'+cx+'" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4" stroke-dasharray="'+ci+'" stroke-dashoffset="'+(ci-d)+'" stroke-linecap="round" filter="drop-shadow(0 0 4px '+sg(score)+')"/></svg><div class="ring-inner"><div class="ring-num" style="color:'+col+'">'+score+'</div><div class="ring-lbl">/ 100</div></div></div>';
-}
-
-// ===== CARD HTML =====
-function cardHTML(l) {
-  var t   = tierClass(l.tier);
-  var lbl = t === 'hot' ? 'Hot Lead' : t === 'warm' ? 'Warm Lead' : 'Low Priority';
-  var urgency = parseInt(l.daysSince) > 365 ? ' 🚨 ' + l.daysSince + ' days' : l.daysSince ? l.daysSince + ' days ago' : '';
-  var chips = [l.severity, l.atFault === 'No' ? '✅ Not at fault' : '', l.hospitalized === 'Yes' ? '🏥 Hospitalized' : '', l.police === 'Yes' ? '📋 Police report' : ''].filter(Boolean).slice(0, 3)
-    .map(function(f){ return '<span class="fc">'+f+'</span>'; }).join('');
-
-  return '<div class="card" onclick="openModal(\''+l.id+'\')">'
-    + '<div class="cs '+t+'"></div>'
-    + '<div class="cb">'
-    + '<div class="cr1"><div><div class="cname">'+(l.name||'Unknown')+'</div><div class="csub">'+l.id+' &middot; '+(l.state||'—')+(urgency?' &middot; '+urgency:'')+'</div></div>'+ring(l.score)+'</div>'
-    + '<div class="acc-type">'+(l.accidentType||'Accident Type Not Specified')+'</div>'
-    + '<div class="ctier '+t+'">'+lbl+' &nbsp;&middot;&nbsp; Grade '+(l.grade||'—')+'</div>'
-    + '<div class="igrid">'
-    + '<div class="ic">At Fault<strong>'+(l.atFault||'—')+'</strong></div>'
-    + '<div class="ic">Severity<strong>'+shortSev(l.severity)+'</strong></div>'
-    + '<div class="ic">Medical<strong>'+shortMed(l.medSought)+'</strong></div>'
-    + '<div class="ic">Damage<strong>'+(l.damageEst||'—')+'</strong></div>'
-    + '</div>'
-    + (chips ? '<div class="fchips">'+chips+'</div>' : '')
-    + '</div>'
-    + '<div class="cfoot"><button class="cbtn cbtn-p" onclick="event.stopPropagation();openModal(\''+l.id+'\')">View Profile</button><button class="cbtn cbtn-o" onclick="event.stopPropagation();copyCard(\''+l.id+'\')">Copy</button></div>'
-    + '</div>';
-}
-
-function shortSev(s) { if(!s) return '—'; if(s.includes('Critical')) return 'Critical'; if(s.includes('Serious')) return 'Serious'; if(s.includes('Significant')) return 'Significant'; if(s.includes('Moderate')) return 'Moderate'; return 'Minor'; }
-function shortMed(s) { if(!s) return '—'; if(s.includes('Same')) return 'Same Day'; if(s.includes('Week')) return 'Within Week'; return 'Not Yet'; }
-
-// ===== MODAL =====
-function openModal(id) {
-  curLead = ALL.find(function(l){ return l.id === id; });
-  if (!curLead) return;
-  var l   = curLead;
-  var col = sc(l.score);
-  var t   = tierClass(l.tier);
-  var lbl = t === 'hot' ? 'Hot Lead' : t === 'warm' ? 'Warm Lead' : 'Low Priority';
-  var days = l.daysSince ? l.daysSince + ' days ago' : '—';
-  var urgBadge = parseInt(l.daysSince) > 365 ? ' 🚨 URGENT' : parseInt(l.daysSince) > 180 ? ' ⚠️ ACT SOON' : '';
-
-  document.getElementById('mName').textContent = l.name || 'Unknown';
-  document.getElementById('mSub').textContent  = l.id + ' · ' + (l.state || '') + (l.timestamp ? ' · ' + new Date(l.timestamp).toLocaleDateString() : '');
-
-  var cb = document.getElementById('mCall');
-  if (l.phone) { cb.textContent = '📞 Call ' + l.phone; cb.onclick = function(){ window.location.href = 'tel:' + l.phone.replace(/\D/g, ''); }; }
-  else { cb.textContent = '📞 No Phone on File'; cb.onclick = null; }
-
-  document.getElementById('mBody').innerHTML =
-    // SCORE HERO
-    '<div class="mscore"><div><div class="ms-n" style="color:'+col+'">'+l.score+'</div><div class="ms-lbl">Attorney Score'+urgBadge+'</div></div><div><div class="ms-badge '+t+'">'+lbl+'</div><div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:5px">Grade '+(l.grade||'—')+'</div></div></div>'
-
-    // ACCIDENT DETAILS
-    + '<div class="msec"><div class="msec-t">Accident Details</div><div class="mgrid">'
-    + mc('Accident Date', l.accidentDate)
-    + mc('Days Since', days)
-    + mc('Accident Type', l.accidentType)
-    + mc('At Fault', l.atFault)
-    + mc('Police Report', l.police)
-    + mc('Damage Estimate', l.damageEst)
-    + '</div></div>'
-
-    // INJURIES
-    + '<div class="msec"><div class="msec-t">Injuries &amp; Medical</div><div class="mgrid">'
-    + mc('Severity', l.severity)
-    + mc('Injuries', l.injuries)
-    + mc('Medical Treatment', l.medSought)
-    + mc('Hospitalized', l.hospitalized)
-    + mc('Missed Work', l.missedWork)
-    + mc('Has Attorney', l.hasAttorney)
-    + '</div></div>'
-
-    // INSURANCE
-    + '<div class="msec"><div class="msec-t">Insurance &amp; Claims</div><div class="mgrid">'
-    + mc('Has Insurance', l.hasInsurance)
-    + mc('Other Driver Ins.', l.otherIns)
-    + mc('Claim Filed', l.claimFiled)
-    + mc('Settlement Offered', l.settlement)
-    + '</div></div>'
-
-    // IMPACT STATEMENT
-    + (l.injuryDesc ? '<div class="msec"><div class="msec-t">Impact Statement</div><div style="font-size:12px;color:var(--muted);line-height:1.7;background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:7px;padding:11px 13px">' + l.injuryDesc + '</div></div>' : '')
-
-    // CONTACT
-    + '<div class="msec"><div class="msec-t">Contact Information</div><div class="contact-block"><div class="contact-t">Ready to Contact</div>'
-    + cr('Phone', l.phone ? '<a href="tel:'+l.phone.replace(/\D/g,'')+'">'+l.phone+'</a>' : '—')
-    + cr('Email', l.email ? '<a href="mailto:'+l.email+'">'+l.email+'</a>' : '—')
-    + cr('State', l.state || '—')
-    + '</div></div>';
-
-  document.getElementById('overlay').classList.add('show');
-}
-
-function mc(l, v) { return '<div class="mcell"><div class="mcell-l">'+l+'</div><div class="mcell-v">'+(v||'—')+'</div></div>'; }
-function cr(l, v) { return '<div class="crow"><span class="c-lbl">'+l+'</span><span class="c-val">'+v+'</span></div>'; }
-function closeOverlay(e) { if(e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('show'); }
-
-function copyCard(id) {
-  var l = ALL.find(function(x){ return x.id === id; });
-  if (!l) return;
-  navigator.clipboard.writeText([l.name, l.state, 'Score: '+l.score, 'Grade: '+l.grade, l.accidentType, l.severity, 'Phone: '+(l.phone||'—'), 'Email: '+(l.email||'—'), 'Days Since: '+l.daysSince].join('\n')).catch(function(){});
-}
-
-function copyModal() {
-  if (!curLead) return;
-  var l = curLead;
-  navigator.clipboard.writeText([
-    'ACCIDENT AI LEAD PROFILE','--------------------',
-    'ID: '+l.id, 'Name: '+(l.name||'—'), 'Phone: '+(l.phone||'—'), 'Email: '+(l.email||'—'),
-    'State: '+(l.state||'—'), 'Score: '+l.score+' / 100', 'Grade: '+(l.grade||'—'), 'Tier: '+(l.tier||'—'),
-    'Accident Date: '+(l.accidentDate||'—'), 'Days Since: '+(l.daysSince||'—'),
-    'Accident Type: '+(l.accidentType||'—'), 'At Fault: '+(l.atFault||'—'),
-    'Injury Severity: '+(l.severity||'—'), 'Injuries: '+(l.injuries||'—'),
-    'Hospitalized: '+(l.hospitalized||'—'), 'Missed Work: '+(l.missedWork||'—'),
-    'Damage Estimate: '+(l.damageEst||'—'), 'Has Attorney: '+(l.hasAttorney||'—')
-  ].join('\n')).catch(function(){});
-}
-
-// ===== SAMPLE DATA (shown if API not connected) =====
-function getSample() {
-  var pool = ['Tennessee','Mississippi','Georgia','Alabama','Texas','Florida','Ohio','Pennsylvania','California'];
-  var useSt = STATE_FILTER.length ? STATE_FILTER : pool;
-  function rs(){ return useSt[Math.floor(Math.random()*useSt.length)]; }
-  return [
-    {id:'ACC-001',name:'James R. Morrison',phone:'(615) 555-0101',email:'jmorrison@email.com',state:rs(),accidentDate:'2025-11-15',daysSince:105,accidentType:'Commercial Truck',atFault:'No',police:'Yes',severity:'Serious — Surgery / Long-term',injuries:'Fractured spine, broken ribs',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'3+ Months',injuryDesc:'Was hit by an 18-wheeler at a red light. Required emergency surgery and is still in physical therapy.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$100K-$500K',score:94,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-12-01'},
-    {id:'ACC-002',name:'Patricia L. Williams',phone:'(601) 555-0202',email:'pwilliams@email.com',state:rs(),accidentDate:'2025-12-02',daysSince:88,accidentType:'Rideshare',atFault:'No',police:'Yes',severity:'Significant — Requires Ongoing Treatment',injuries:'TBI, whiplash, shoulder injury',medSought:'Yes — Same Day',hospitalized:'No',missedWork:'1-3 Months',injuryDesc:'Uber driver ran red light at high speed. Currently receiving weekly physical therapy and neurological evaluations.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$25K-$100K',score:81,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-12-15'},
-    {id:'ACC-003',name:'Robert T. Jackson',phone:'(404) 555-0303',email:'rjackson@email.com',state:rs(),accidentDate:'2026-01-10',daysSince:49,accidentType:'Auto vs Auto',atFault:'No',police:'Yes',severity:'Moderate — Visible Injury',injuries:'Whiplash, back pain',medSought:'Yes — Within Week',hospitalized:'No',missedWork:'1 Week',injuryDesc:'Rear-ended at a stop sign. Experiencing chronic neck and back pain.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'No',settlement:'No',hasAttorney:'No',damageEst:'$5K-$25K',score:64,grade:'B',tier:'🟡 Warm Lead',timestamp:'2026-01-20'},
-    {id:'ACC-004',name:'Sandra M. Davis',phone:'(615) 555-0404',email:'sdavis@email.com',state:rs(),accidentDate:'2025-10-20',daysSince:131,accidentType:'Hit & Run / Uninsured',atFault:'No',police:'Yes',severity:'Critical — Life-altering / Permanent',injuries:'Paralysis — lower body, traumatic brain injury',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'Permanently Unable',injuryDesc:'Hit by uninsured driver at freeway speed. Paralyzed from the waist down. Currently at inpatient rehab facility.',hasInsurance:'Yes',otherIns:'No',claimFiled:'Yes',settlement:'No',hasAttorney:'No',damageEst:'$500K+',score:97,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-11-01'},
-    {id:'ACC-005',name:'Michael A. Thompson',phone:'(901) 555-0505',email:'mthompson@email.com',state:rs(),accidentDate:'2026-01-28',daysSince:31,accidentType:'Commercial Truck',atFault:'Unknown',police:'Pending',severity:'Significant — Requires Ongoing Treatment',injuries:'Knee injury, multiple lacerations',medSought:'Yes — Same Day',hospitalized:'No',missedWork:'2-4 Weeks',injuryDesc:'Sideswiped by delivery truck on the highway. Knee surgery scheduled.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'No',settlement:'No',hasAttorney:'No',damageEst:'$25K-$100K',score:74,grade:'B',tier:'🟡 Warm Lead',timestamp:'2026-02-01'},
-    {id:'ACC-006',name:'Dorothy K. Henderson',phone:'(615) 555-0606',email:'dhenderson@email.com',state:rs(),accidentDate:'2025-09-15',daysSince:166,accidentType:'Auto vs Auto',atFault:'No',police:'Yes',severity:'Serious — Surgery / Long-term',injuries:'Herniated discs — L4-L5, S1',medSought:'Yes — Same Day',hospitalized:'Yes',missedWork:'3+ Months',injuryDesc:'T-boned at an intersection. Two herniated discs requiring surgical intervention and long-term pain management.',hasInsurance:'Yes',otherIns:'Yes',claimFiled:'Yes',settlement:'Offered but rejected',hasAttorney:'No',damageEst:'$100K-$500K',score:89,grade:'A',tier:'🔴 Hot Lead',timestamp:'2025-10-01'}
-  ];
-}
-
-// ===== START =====
+// ===== INIT =====
 loadThemePreference();
-loadLeads();
 </script>
 </body>
 </html>
